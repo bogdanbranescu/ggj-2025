@@ -1,3 +1,7 @@
+# Project-specific
+_export/
+_aseprite/
+
 # Godot 4+ specific ignores
 .godot/
 
