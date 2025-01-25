@@ -1,0 +1,16 @@
+[gd_scene load_steps=4 format=3 uid="uid://bxcafepx7jj3p"]
+
+[ext_resource type="Script" path="res://entities/bubble/Bubble.gd" id="1_m4ks0"]
+[ext_resource type="Texture2D" uid="uid://dorck8k01kp64" path="res://entities/bubble/bubble.png" id="2_f5v7h"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_w1ece"]
+radius = 6.0
+
+[node name="Bubble" type="Area2D"]
+script = ExtResource("1_m4ks0")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("2_f5v7h")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_w1ece")

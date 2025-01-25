@@ -1,0 +1,53 @@
+[gd_scene load_steps=9 format=3 uid="uid://davusn2vtvfv8"]
+
+[ext_resource type="Texture2D" uid="uid://cp131ajjcw7ic" path="res://entities/sea_urchin/sea-urchin.png" id="1_wf5d6"]
+[ext_resource type="Script" path="res://entities/sea_urchin/SeaUrchin.gd" id="1_xda4y"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ef5ls"]
+atlas = ExtResource("1_wf5d6")
+region = Rect2(0, 0, 20, 20)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_882bp"]
+atlas = ExtResource("1_wf5d6")
+region = Rect2(20, 0, 20, 20)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_2rebv"]
+atlas = ExtResource("1_wf5d6")
+region = Rect2(40, 0, 20, 20)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_xb2gm"]
+atlas = ExtResource("1_wf5d6")
+region = Rect2(60, 0, 20, 20)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_e83bv"]
+animations = [{
+"frames": [{
+"duration": 2.0,
+"texture": SubResource("AtlasTexture_ef5ls")
+}, {
+"duration": 2.0,
+"texture": SubResource("AtlasTexture_882bp")
+}, {
+"duration": 2.0,
+"texture": SubResource("AtlasTexture_2rebv")
+}, {
+"duration": 2.0,
+"texture": SubResource("AtlasTexture_xb2gm")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_tlb1m"]
+
+[node name="SeaUrchin" type="StaticBody2D"]
+script = ExtResource("1_xda4y")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_e83bv")
+autoplay = "default"
+frame_progress = 0.928542
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_tlb1m")
