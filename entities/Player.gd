@@ -28,3 +28,17 @@ func _input(_event: InputEvent) -> void:
 
 	if direction != Vector2.ZERO and not raycast_by_dir[direction].is_colliding():
 		position += direction * Global.TILE_SIZE
+
+	if Input.is_action_just_pressed("cancel"):
+		print("CANCEL")
+		%StateChart.send_event("go_to_shop")
+
+
+func _on_swim_state_entered() -> void:
+	#set_process(false)
+	set_process_input(true)
+
+
+func _on_swim_state_exited() -> void:
+	#set_process(false)
+	set_process_input(false)

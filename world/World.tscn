@@ -1,4 +1,4 @@
-[gd_scene load_steps=22 format=4 uid="uid://cwrk5qs1xw8ww"]
+[gd_scene load_steps=29 format=4 uid="uid://cwrk5qs1xw8ww"]
 
 [ext_resource type="Script" path="res://world/World.gd" id="1_emwio"]
 [ext_resource type="Script" path="res://world/Timekeeper.gd" id="2_xpxpg"]
@@ -12,6 +12,8 @@
 [ext_resource type="Texture2D" uid="uid://dv3ffh2llfo0t" path="res://ui/menu-frame-9patch.png" id="8_ydyjg"]
 [ext_resource type="Texture2D" uid="uid://gtmcxcpn07l1" path="res://ui/glyph-tab.png" id="9_knilg"]
 [ext_resource type="Script" path="res://addons/godot_state_charts/state_chart.gd" id="12_8mk8q"]
+[ext_resource type="Script" path="res://ui/ui_elements/Shop.gd" id="12_641mc"]
+[ext_resource type="Texture2D" uid="uid://docbj4m7lo1lp" path="res://ui/icons-and-glyphs.png" id="12_ykosg"]
 [ext_resource type="Script" path="res://addons/godot_state_charts/compound_state.gd" id="13_yy8p7"]
 [ext_resource type="Script" path="res://addons/godot_state_charts/atomic_state.gd" id="14_nlpmn"]
 [ext_resource type="Script" path="res://addons/godot_state_charts/transition.gd" id="15_g86g8"]
@@ -121,6 +123,26 @@ RichTextLabel/colors/default_color = Color(0.752941, 0.819608, 0.8, 1)
 RichTextLabel/font_sizes/normal_font_size = 16
 RichTextLabel/fonts/normal_font = ExtResource("8_fwsdr")
 
+[sub_resource type="AtlasTexture" id="AtlasTexture_ih7ni"]
+atlas = ExtResource("12_ykosg")
+region = Rect2(0, 28, 14, 14)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_w1emr"]
+atlas = ExtResource("12_ykosg")
+region = Rect2(0, 56, 14, 14)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_cw6wt"]
+atlas = ExtResource("12_ykosg")
+region = Rect2(0, 42, 14, 14)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_n351o"]
+atlas = ExtResource("12_ykosg")
+region = Rect2(0, 0, 14, 14)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_gtnts"]
+atlas = ExtResource("12_ykosg")
+region = Rect2(0, 14, 14, 14)
+
 [node name="World" type="Node2D"]
 script = ExtResource("1_emwio")
 
@@ -207,23 +229,66 @@ offset_left = 10.0
 offset_top = 12.0
 offset_right = -10.0
 offset_bottom = -12.0
+script = ExtResource("12_641mc")
 
-[node name="ShopItem" type="HBoxContainer" parent="UI/UIContainer/SidePanel/ShopFrame/Shop"]
+[node name="ItemShovel" type="HBoxContainer" parent="UI/UIContainer/SidePanel/ShopFrame/Shop"]
 layout_mode = 2
 
-[node name="Icon" type="TextureRect" parent="UI/UIContainer/SidePanel/ShopFrame/Shop/ShopItem"]
+[node name="Icon" type="TextureRect" parent="UI/UIContainer/SidePanel/ShopFrame/Shop/ItemShovel"]
 layout_mode = 2
+texture = SubResource("AtlasTexture_ih7ni")
+stretch_mode = 2
 
-[node name="Name" type="RichTextLabel" parent="UI/UIContainer/SidePanel/ShopFrame/Shop/ShopItem"]
+[node name="Name" type="RichTextLabel" parent="UI/UIContainer/SidePanel/ShopFrame/Shop/ItemShovel"]
 layout_mode = 2
 size_flags_horizontal = 3
 text = "Shovel"
 fit_content = true
 
-[node name="Price" type="Label" parent="UI/UIContainer/SidePanel/ShopFrame/Shop/ShopItem"]
+[node name="Price" type="Label" parent="UI/UIContainer/SidePanel/ShopFrame/Shop/ItemShovel"]
+layout_mode = 2
+size_flags_vertical = 8
+text = "20"
+horizontal_alignment = 2
+
+[node name="ItemHealth" type="HBoxContainer" parent="UI/UIContainer/SidePanel/ShopFrame/Shop"]
+layout_mode = 2
+
+[node name="Icon" type="TextureRect" parent="UI/UIContainer/SidePanel/ShopFrame/Shop/ItemHealth"]
+layout_mode = 2
+texture = SubResource("AtlasTexture_w1emr")
+stretch_mode = 2
+
+[node name="Name" type="RichTextLabel" parent="UI/UIContainer/SidePanel/ShopFrame/Shop/ItemHealth"]
 layout_mode = 2
 size_flags_horizontal = 3
-text = "123"
+text = "Health"
+fit_content = true
+
+[node name="Price" type="Label" parent="UI/UIContainer/SidePanel/ShopFrame/Shop/ItemHealth"]
+layout_mode = 2
+size_flags_vertical = 8
+text = "25"
+horizontal_alignment = 2
+
+[node name="ItemCollector" type="HBoxContainer" parent="UI/UIContainer/SidePanel/ShopFrame/Shop"]
+layout_mode = 2
+
+[node name="Icon" type="TextureRect" parent="UI/UIContainer/SidePanel/ShopFrame/Shop/ItemCollector"]
+layout_mode = 2
+texture = SubResource("AtlasTexture_cw6wt")
+stretch_mode = 2
+
+[node name="Name" type="RichTextLabel" parent="UI/UIContainer/SidePanel/ShopFrame/Shop/ItemCollector"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Collector"
+fit_content = true
+
+[node name="Price" type="Label" parent="UI/UIContainer/SidePanel/ShopFrame/Shop/ItemCollector"]
+layout_mode = 2
+size_flags_vertical = 8
+text = "50"
 horizontal_alignment = 2
 
 [node name="HP" type="HBoxContainer" parent="UI/UIContainer/SidePanel"]
@@ -231,15 +296,20 @@ layout_mode = 2
 
 [node name="Icon" type="TextureRect" parent="UI/UIContainer/SidePanel/HP"]
 layout_mode = 2
+texture = SubResource("AtlasTexture_n351o")
+stretch_mode = 2
 
 [node name="HealthBar" type="TextureProgressBar" parent="UI/UIContainer/SidePanel/HP"]
 layout_mode = 2
+nine_patch_stretch = true
 
 [node name="Bubbles" type="HBoxContainer" parent="UI/UIContainer/SidePanel"]
 layout_mode = 2
 
 [node name="Icon" type="TextureRect" parent="UI/UIContainer/SidePanel/Bubbles"]
 layout_mode = 2
+texture = SubResource("AtlasTexture_gtnts")
+stretch_mode = 2
 
 [node name="BubbleCount" type="Label" parent="UI/UIContainer/SidePanel/Bubbles"]
 unique_name_in_owner = true
@@ -249,7 +319,9 @@ text = "56"
 horizontal_alignment = 2
 
 [node name="StateChart" type="Node" parent="."]
+unique_name_in_owner = true
 script = ExtResource("12_8mk8q")
+track_in_editor = true
 
 [node name="Mode" type="Node" parent="StateChart"]
 script = ExtResource("13_yy8p7")
@@ -258,19 +330,32 @@ initial_state = NodePath("Swim")
 [node name="Swim" type="Node" parent="StateChart/Mode"]
 script = ExtResource("14_nlpmn")
 
-[node name="toPause" type="Node" parent="StateChart/Mode/Swim"]
+[node name="toShop" type="Node" parent="StateChart/Mode/Swim"]
 script = ExtResource("15_g86g8")
-to = NodePath("../../Pause")
-event = &"pause_event"
+to = NodePath("../../Shop")
+event = &"go_to_shop"
 delay_in_seconds = "0.0"
 
 [node name="Shop" type="Node" parent="StateChart/Mode"]
 script = ExtResource("14_nlpmn")
 
+[node name="toSwim" type="Node" parent="StateChart/Mode/Shop"]
+script = ExtResource("15_g86g8")
+to = NodePath("../../Swim")
+event = &"end_shop"
+delay_in_seconds = "0.0"
+
 [node name="Placement" type="Node" parent="StateChart/Mode"]
 script = ExtResource("14_nlpmn")
 
-[node name="Pause" type="Node" parent="StateChart/Mode"]
-script = ExtResource("14_nlpmn")
+[node name="toSwim" type="Node" parent="StateChart/Mode/Placement"]
+script = ExtResource("15_g86g8")
+to = NodePath("../../Swim")
+event = &"end_placement"
+delay_in_seconds = "0.0"
 
 [connection signal="timeout" from="Timekeeper/Ticker" to="Timekeeper" method="_on_ticker_timeout"]
+[connection signal="state_entered" from="StateChart/Mode/Swim" to="Player" method="_on_swim_state_entered"]
+[connection signal="state_exited" from="StateChart/Mode/Swim" to="Player" method="_on_swim_state_exited"]
+[connection signal="state_entered" from="StateChart/Mode/Shop" to="UI/UIContainer/SidePanel/ShopFrame/Shop" method="_on_shop_state_entered"]
+[connection signal="state_exited" from="StateChart/Mode/Shop" to="UI/UIContainer/SidePanel/ShopFrame/Shop" method="_on_shop_state_exited"]

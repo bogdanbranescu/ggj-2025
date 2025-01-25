@@ -11,4 +11,3 @@ func _ready() -> void:
 
 func _process(_delta: float) -> void:
     %BubbleCount.text = str(current_bubbles)
-    
