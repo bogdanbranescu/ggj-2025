@@ -15,8 +15,6 @@ func _on_shop_state_entered() -> void:
 
 
 func _on_shop_state_exited() -> void:
-	release_focus()
-	
 	set_process(false)
 	set_process_input(false)
 

@@ -7,6 +7,15 @@ enum ITEM_TYPE {
     COLLECTOR
 }
 
+enum TILE_TYPE {
+    BUBBLE,
+    URCHIN,
+    SHOOTER,
+    COLLECTOR,
+    SAND,
+    SHELL
+}
+
 var item_schedules = {
     ITEM_TYPE.SHOVEL: {price = 20, increment = 5},
     ITEM_TYPE.HEALTH: {price = 40, increment = 10},
@@ -18,5 +27,6 @@ const MAX_HP = 100
 const BUBBLES_PER_BUBBLE = 1
 const HEAL_AMOUNT = 20
 const DAMAGE_PER_OCTOPUS_HIT = 5
+const SHELL_INTERVAL = 4
 
 var world_path = "/root/World"

@@ -1,4 +1,4 @@
 extends StaticBody2D
 
 
-var type := "sea_urchin"
+var type := Global.TILE_TYPE.URCHIN

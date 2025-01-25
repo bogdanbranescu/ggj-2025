@@ -9,43 +9,46 @@ var price: int
 
 
 func _ready() -> void:
-    focus_entered.connect(select)
-    focus_exited.connect(deselect)
+	focus_entered.connect(select)
+	focus_exited.connect(deselect)
 
-    price = Global.item_schedules[type].price + level * Global.item_schedules[type].increment
-    $Price.text = str(price)
+	price = Global.item_schedules[type].price + level * Global.item_schedules[type].increment
+	$Price.text = str(price)
 
 
 func select() -> void:
-    modulate = Color.BLUE
+	modulate = Color.BLUE
 
 
 func deselect() -> void:
-    modulate = Color.WHITE
+	modulate = Color.WHITE
 
 
 func _input(_event: InputEvent) -> void:
-    if Input.is_action_just_pressed("confirm") and has_focus():
-        print(type)
-        handle_buy()
+	if Input.is_action_just_pressed("confirm") and has_focus():
+		print(type)
+		handle_buy()
 
 
 func handle_buy():
-    if world.current_bubbles < price:
-        return
+	if world.current_bubbles < price:
+		return
 
-    world.current_bubbles -= price
-    
-    match type:
-        Global.ITEM_TYPE.SHOVEL:
-            print("SHOVEL")
-            %StateChart.send_event("go_to_placement")
+	world.current_bubbles -= price
+	
+	match type:
+		Global.ITEM_TYPE.SHOVEL:
+			print("SHOVEL")
+			%StateChart.send_event("go_to_placement")
 
-        Global.ITEM_TYPE.HEALTH:
-            world.heal(Global.HEAL_AMOUNT)
+		Global.ITEM_TYPE.HEALTH:
+			world.heal(Global.HEAL_AMOUNT)
 
-        Global.ITEM_TYPE.COLLECTOR:
-            print("COLLECTOR")
+		Global.ITEM_TYPE.COLLECTOR:
+			print("COLLECTOR")
+			%StateChart.send_event("go_to_placement")
 
-        _:
-            print("INVALID SHOP ITEM TYPE: ", type)
+		_:
+			print("INVALID SHOP ITEM TYPE: ", type)
+
+	release_focus()

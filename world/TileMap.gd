@@ -5,7 +5,8 @@ var scene_coords := {}
 
 
 func _ready() -> void:
-	EventBus.tick.connect(tick_update)
+	#EventBus.tick.connect(tick_update)
+	pass
 
 
 func _enter_tree():
@@ -31,6 +32,29 @@ func get_cell_scene(coords: Vector2i) -> Node:
 func tick_update() -> void:
 	for cell_coords in get_used_cells():
 		var cell = get_cell_scene(cell_coords)
-		if cell and cell.type == "bubble":
-			set_cell(cell_coords - Vector2i(0, 1), 0, Vector2i(0, 0), 2)
-			erase_cell(cell_coords)
+		
+		if cell and cell.type == Global.TILE_TYPE.BUBBLE:
+			check_bubble_collision(cell, cell_coords)
+
+
+
+func check_bubble_collision(bubble, bubble_coords):
+	var next_position = bubble_coords - Vector2i(0, 1)
+
+	var cell_above_bubble = get_cell_scene(next_position)
+
+	place_tile(next_position, Global.TILE_TYPE.BUBBLE)
+	erase_cell(bubble_coords)
+
+
+func place_tile(location: Vector2i, type: int):
+	match type:
+		Global.TILE_TYPE.BUBBLE:
+			set_cell(location, 0, Vector2i(0, 0), 2)
+
+		_:
+			print("INVALID TILE TYPE: ", type)
+
+
+func remove_tile(location: Vector2i):
+	erase_cell(location)

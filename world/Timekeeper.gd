@@ -18,5 +18,5 @@ func pause() -> void:
 
 
 func _on_ticker_timeout() -> void:
-	print("tick!")
+	#print("tick!")
 	EventBus.tick.emit()
