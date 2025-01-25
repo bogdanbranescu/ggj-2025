@@ -10,15 +10,19 @@ func _on_shop_state_entered() -> void:
 	set_process(true)
 	set_process_input(true)
 
+	get_children()[0].grab_focus()
+	# TODO show cursor
+
 
 func _on_shop_state_exited() -> void:
-	print("BLA GOODBYE")
+	release_focus()
+	
 	set_process(false)
 	set_process_input(false)
 
 
 func _process(_delta: float) -> void:
-	print("SHOP")
+	pass
 
 
 func _input(_event: InputEvent) -> void:

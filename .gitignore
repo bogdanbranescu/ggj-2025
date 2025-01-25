@@ -1,7 +1,6 @@
 # Project-specific
 _export/
 _aseprite/
-addons/fmod
 
 # Godot 4+ specific ignores
 .godot/

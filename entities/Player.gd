@@ -30,7 +30,7 @@ func _input(_event: InputEvent) -> void:
 		position += direction * Global.TILE_SIZE
 
 	if Input.is_action_just_pressed("cancel"):
-		print("CANCEL")
+		print("PLAYER CANCEL")
 		%StateChart.send_event("go_to_shop")
 
 

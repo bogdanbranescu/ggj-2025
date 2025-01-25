@@ -44,8 +44,8 @@ FmodManager="*res://addons/fmod/FmodManager.gd"
 window/size/viewport_width=480
 window/size/viewport_height=270
 window/size/resizable=false
-window/size/window_width_override=1920
-window/size/window_height_override=1080
+window/size/window_width_override=1440
+window/size/window_height_override=810
 window/stretch/mode="viewport"
 
 [editor_plugins]
@@ -54,7 +54,19 @@ enabled=PackedStringArray("res://addons/fmod/plugin.cfg", "res://addons/godot_st
 
 [input]
 
+ui_focus_next={
+"deadzone": 0.5,
+"events": []
+}
+ui_text_completion_replace={
+"deadzone": 0.5,
+"events": []
+}
 ui_text_newline_above={
+"deadzone": 0.5,
+"events": []
+}
+ui_text_indent={
 "deadzone": 0.5,
 "events": []
 }
