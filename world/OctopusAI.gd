@@ -9,9 +9,10 @@ func _ready() -> void:
 	var bus_idx = AudioServer.get_bus_index("Master")
 	AudioServer.set_bus_mute(bus_idx, true)
 
+	EventBus.octopus_attacked.connect(attack)
+
 	%OctopusHealthBar.value = clamp(health, 0, 100)
 	EventBus.octopus_take_damage.connect(handle_take_damage)
-	get_tree().create_tween().tween_callback(attack).set_delay(12)
 
 
 func attack():

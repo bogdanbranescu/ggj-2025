@@ -395,6 +395,37 @@ stretch_margin_right = 10
 texture_under = SubResource("AtlasTexture_ikdtq")
 texture_progress = SubResource("AtlasTexture_prrnb")
 
+[node name="MarginContainer" type="MarginContainer" parent="UI/OctopusUI"]
+custom_minimum_size = Vector2(10, 10)
+layout_mode = 2
+
+[node name="AttackInfoContainer" type="VBoxContainer" parent="UI/OctopusUI"]
+custom_minimum_size = Vector2(120, 0)
+layout_mode = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="UI/OctopusUI/AttackInfoContainer"]
+custom_minimum_size = Vector2(0, 10)
+layout_mode = 2
+
+[node name="AttackInfo" type="HBoxContainer" parent="UI/OctopusUI/AttackInfoContainer"]
+custom_minimum_size = Vector2(100, 0)
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="AttackingIn" type="RichTextLabel" parent="UI/OctopusUI/AttackInfoContainer/AttackInfo"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Attacking in"
+fit_content = true
+
+[node name="AttackingInNumber" type="RichTextLabel" parent="UI/OctopusUI/AttackInfoContainer/AttackInfo"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(20, 20)
+layout_mode = 2
+size_flags_horizontal = 8
+text = "10"
+fit_content = true
+
 [node name="UIContainer" type="HBoxContainer" parent="UI"]
 anchors_preset = 11
 anchor_left = 1.0

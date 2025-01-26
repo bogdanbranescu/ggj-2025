@@ -10,6 +10,11 @@ extends CharacterBody2D
 
 @onready var world = get_node(Global.world_path)
 
+
+func _ready() -> void:
+	EventBus.octopus_attacked.connect(handleOnTakeDamage)
+
+
 # func _process(_delta: float) -> void:
 # 	var collision = move_and_collide(Vector2.ZERO)
 # 	if collision:
@@ -57,4 +62,5 @@ func _on_area_2d_area_entered(area: Area2D) -> void:
 
 
 func handleOnTakeDamage():
-	world.playerTakeDamage(1)
+	print("Player took damage!")
+	world.playerTakeDamage(Global.DAMAGE_PER_OCTOPUS_HIT)

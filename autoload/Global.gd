@@ -32,5 +32,7 @@ const BUBBLES_PER_COLLECTOR = 2;
 const HEAL_AMOUNT = 20
 const DAMAGE_PER_OCTOPUS_HIT = 5
 const SHELL_INTERVAL = 4
+const TICKS_PER_PEACE_PHASE := 20
+
 
 var world_path = "/root/World"

@@ -49,7 +49,7 @@ func checkIfCanSpawnClam() -> bool:
 	var rng = RandomNumberGenerator.new()
 	rng.randomize()
 
-	if rng.randi() % 4 == 0:
+	if !rng.randi() % 4 == 0:
 		can_spawn = false
 
 	return can_spawn;
