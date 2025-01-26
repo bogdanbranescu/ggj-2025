@@ -21,6 +21,11 @@ func interact_on_collision(collider_object: Node):
 	var tilemap_position = get_parent().local_to_map(position)
 	if collider_object.name == "Player":
 		world.current_bubbles += Global.BUBBLES_PER_BUBBLE
+	elif collider_object.has_method("interact_on_collision"):
+		collider_object.interact_on_collision()
+	else:
+		pass ;
+
 	get_parent().remove_tile(tilemap_position)
 
 

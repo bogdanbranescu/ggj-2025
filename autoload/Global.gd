@@ -14,7 +14,8 @@ enum TILE_TYPE {
     SHOOTER,
     COLLECTOR,
     SAND,
-    SHELL
+    SHELL,
+    BULLET,
 }
 
 var item_schedules = {

@@ -37,7 +37,6 @@ func tick_update() -> void:
 			check_bubble_collision(cell, cell_coords)
 
 
-
 func check_bubble_collision(bubble, bubble_coords):
 	var next_position = bubble_coords - Vector2i(0, 1)
 
@@ -51,6 +50,10 @@ func place_tile(location: Vector2i, type: int):
 	match type:
 		Global.TILE_TYPE.BUBBLE:
 			set_cell(location, 0, Vector2i(0, 0), 2)
+
+		Global.TILE_TYPE.BULLET:
+			set_cell(location, 0, Vector2i(0, 0), 2)
+			
 
 		_:
 			print("INVALID TILE TYPE: ", type)
