@@ -24,7 +24,7 @@
 [ext_resource type="PackedScene" uid="uid://cilb028n2qvvx" path="res://entities/shell/Shell.tscn" id="21_a6tww"]
 [ext_resource type="Script" path="res://ui/lose_screen.gd" id="22_f3dp0"]
 [ext_resource type="PackedScene" uid="uid://d2mof7nlwni8h" path="res://entities/shooter/Shooter.tscn" id="23_heydi"]
-[ext_resource type="Texture2D" uid="uid://c3ic7c0dacfu0" path="res://ui/menu-frame-filled-9patch.png" id="23_hqcij"]
+[ext_resource type="Texture2D" uid="uid://bqkxmvfkumepg" path="res://ui/menu-frame-filled-9patch.png" id="23_hqcij"]
 [ext_resource type="PackedScene" uid="uid://ds6qdynkb6bou" path="res://entities/collector/Collector.tscn" id="24_1eyrg"]
 [ext_resource type="PackedScene" uid="uid://coyffxkcgwjc5" path="res://entities/bullet/Bullet.tscn" id="25_jlqvu"]
 

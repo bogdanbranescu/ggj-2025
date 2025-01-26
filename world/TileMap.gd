@@ -54,8 +54,11 @@ func place_tile(location: Vector2i, type: int):
 		Global.TILE_TYPE.BULLET:
 			set_cell(location, 0, Vector2i(0, 0), 6)
 			
-
+		Global.TILE_TYPE.COLLECTOR:
+			set_cell(location, 0, Vector2i(0, 0), 4)
 		
+		Global.TILE_TYPE.SHOOTER:
+			set_cell(location, 0, Vector2i(0, 0), 5)
 
 		_:
 			print("INVALID TILE TYPE: ", type)
@@ -63,3 +66,7 @@ func place_tile(location: Vector2i, type: int):
 
 func remove_tile(location: Vector2i):
 	erase_cell(location)
+
+
+func check_tile():
+	pass

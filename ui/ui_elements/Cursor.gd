@@ -86,16 +86,18 @@ func dig():
 func place_shooter():
 	var map_position = %TileMapEntities.local_to_map(self.position)
 	var cell_data = %TileMapEntities.get_cell_tile_data(map_position)
+	var is_sand = cell_data and cell_data.get_custom_data("is_sand")
 
-	if true:
-		%TileMapEntities.place_tile()
+	if not is_sand:
+		%TileMapEntities.place_tile(map_position, Global.TILE_TYPE.SHOOTER)
 		%StateChart.send_event("end_placement")
 
 
 func place_collector():
 	var map_position = %TileMapEntities.local_to_map(self.position)
 	var cell_data = %TileMapEntities.get_cell_tile_data(map_position)
+	var is_sand = cell_data and cell_data.get_custom_data("is_sand")
 
-	if true:
-		%TileMapEntities.place_tile()
+	if not is_sand:
+		%TileMapEntities.place_tile(map_position, Global.TILE_TYPE.COLLECTOR)
 		%StateChart.send_event("end_placement")
