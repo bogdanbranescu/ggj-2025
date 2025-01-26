@@ -32,12 +32,22 @@ func _input(_event: InputEvent) -> void:
 	elif Input.is_action_just_pressed("ui_right"):
 		direction = Vector2.RIGHT
 
-	if direction != Vector2.ZERO and not raycast_by_dir[direction].is_colliding():
-		position += direction * Global.TILE_SIZE
+	if direction != Vector2.ZERO:
+		var next_position = %TileMapEntities.local_to_map(self.position + direction * Global.TILE_SIZE)
+		if next_position.x == clamp(next_position.x, 2, 15) and next_position.y == clamp(next_position.y, 2, 11):
+			position += direction * Global.TILE_SIZE
 
 	if Input.is_action_just_pressed("confirm"):
-		%StateChart.send_event("end_placement")
-
+		match type:
+			Global.ITEM_TYPE.SHOVEL:
+				dig()
+	
+			Global.ITEM_TYPE.COLLECTOR:
+				place_collector()
+		
+			Global.ITEM_TYPE.SHOOTER:
+				place_shooter()
+	
 	if Input.is_action_just_pressed("cancel"):
 		print("CURSOR CANCEL")
 		%StateChart.send_event("go_to_shop")
@@ -57,4 +67,19 @@ func _on_placement_state_exited() -> void:
 
 func set_type(cursor_type: int) -> void:
 	type = cursor_type
-	
+
+
+func dig():
+	var map_position = %TileMapEntities.local_to_map(self.position)
+	var cell_data = %TileMapEntities.get_cell_tile_data(map_position)
+	if cell_data and cell_data.get_custom_data("is_sand") == true:
+		%TileMapEntities.remove_tile(map_position)
+		%StateChart.send_event("end_placement")
+
+
+func place_shooter():
+	pass
+
+
+func place_collector():
+	pass

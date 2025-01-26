@@ -37,15 +37,22 @@ func handle_buy():
 	world.current_bubbles -= price
 	
 	match type:
-		Global.ITEM_TYPE.SHOVEL:
-			print("SHOVEL")
-			%StateChart.send_event("go_to_placement")
-
 		Global.ITEM_TYPE.HEALTH:
 			world.heal(Global.HEAL_AMOUNT)
 
+		Global.ITEM_TYPE.SHOVEL:
+			print("SHOVEL")
+			%Cursor.type = Global.ITEM_TYPE.SHOVEL
+			%StateChart.send_event("go_to_placement")
+
 		Global.ITEM_TYPE.COLLECTOR:
 			print("COLLECTOR")
+			%Cursor.type = Global.ITEM_TYPE.COLLECTOR
+			%StateChart.send_event("go_to_placement")
+
+		Global.ITEM_TYPE.SHOOTER:
+			print("SHOOTER")
+			%Cursor.type = Global.ITEM_TYPE.SHOOTER
 			%StateChart.send_event("go_to_placement")
 
 		_:

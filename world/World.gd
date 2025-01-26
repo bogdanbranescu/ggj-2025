@@ -2,7 +2,7 @@ extends Node2D
 
 
 var current_bubbles := 1000
-var current_hp := Global.MAX_HP
+var current_hp := 20#Global.MAX_HP
 
 
 func _ready() -> void:
