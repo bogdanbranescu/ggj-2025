@@ -1,11 +1,16 @@
 extends Node2D
 
 
-var current_bubbles := 1000
-var current_hp := 20 # Global.MAX_HP
+var current_bubbles := 0
+var current_hp := 100 # Global.MAX_HP
+
+var shake_offset := Vector2.ZERO
+var is_shaking := false
 
 
 func _ready() -> void:
+	EventBus.octopus_attacked.connect(start_shaking_screen)
+
 	$BGMAttack.volume_db = 0
 	$BGMPeaceful.play()
 
@@ -18,6 +23,10 @@ func _ready() -> void:
 
 func _process(_delta: float) -> void:
 	%BubbleCount.text = str(current_bubbles)
+
+	if is_shaking:
+		shake_screen()
+		get_tree().create_tween().tween_property($BGMAttack, "volume_db", -80, 4)
 
 
 func heal(amount: int) -> void:
@@ -49,7 +58,21 @@ func checkIfCanSpawnClam() -> bool:
 	var rng = RandomNumberGenerator.new()
 	rng.randomize()
 
-	if !rng.randi() % 4 == 0:
+	if !rng.randi() % 3 == 0:
 		can_spawn = false
 
 	return can_spawn;
+
+
+func start_shaking_screen():
+	is_shaking = true
+	get_tree().create_tween().tween_callback(
+		func():
+			is_shaking = false
+			shake_offset = Vector2.ZERO
+	).set_delay(0.6)
+
+
+func shake_screen():
+	shake_offset = Vector2(randi() % 11 - 5, randi() % 11 - 5)
+	position = shake_offset

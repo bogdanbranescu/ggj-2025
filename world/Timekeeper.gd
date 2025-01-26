@@ -28,3 +28,6 @@ func _on_ticker_timeout() -> void:
 	if current_tick_count >= Global.TICKS_PER_PEACE_PHASE:
 		EventBus.octopus_attacked.emit()
 		current_tick_count = 0
+
+	elif Global.TICKS_PER_PEACE_PHASE - current_tick_count == 6:
+		EventBus.crossfade_music.emit()

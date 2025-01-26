@@ -19,20 +19,21 @@ enum TILE_TYPE {
 }
 
 var item_schedules = {
-    ITEM_TYPE.SHOVEL: {price = 20, increment = 5},
-    ITEM_TYPE.HEALTH: {price = 40, increment = 10},
-    ITEM_TYPE.COLLECTOR: {price = 100, increment = 20},
-    ITEM_TYPE.SHOOTER: {price = 100, increment = 50}
+    ITEM_TYPE.SHOVEL: {price = 10, increment = 5},
+    ITEM_TYPE.HEALTH: {price = 25, increment = 10},
+    ITEM_TYPE.COLLECTOR: {price = 30, increment = 20},
+    ITEM_TYPE.SHOOTER: {price = 40, increment = 50}
 }
 
 const TILE_SIZE = 20
 const MAX_HP = 100
 const BUBBLES_PER_BUBBLE = 1
-const BUBBLES_PER_COLLECTOR = 2;
+const BUBBLES_PER_COLLECTOR = 2
 const HEAL_AMOUNT = 20
-const DAMAGE_PER_OCTOPUS_HIT = 5
-const SHELL_INTERVAL = 4
-const TICKS_PER_PEACE_PHASE := 20
+const DAMAGE_PER_OCTOPUS_HIT = 8
+const SHELL_INTERVAL = 3
+const TICKS_PER_PEACE_PHASE := 30
+const BULLET_DAMAGE := 1
 
 
 var world_path = "/root/World"

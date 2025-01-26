@@ -30,7 +30,7 @@ func _input(_event: InputEvent) -> void:
 		handle_buy()
 
 	if Input.is_action_just_pressed("cancel") and has_focus():
-		print(type)
+		release_focus()
 		%StateChart.send_event("end_shop")
 
 
@@ -64,3 +64,10 @@ func handle_buy():
 			print("INVALID SHOP ITEM TYPE: ", type)
 
 	release_focus()
+
+
+# func deduct_price():
+# 	if world.current_bubbles < price:
+# 		return
+
+# 	world.current_bubbles -= price
