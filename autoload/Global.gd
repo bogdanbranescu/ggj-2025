@@ -4,7 +4,8 @@ extends Node
 enum ITEM_TYPE {
     SHOVEL,
     HEALTH,
-    COLLECTOR
+    COLLECTOR,
+    SHOOTER
 }
 
 enum TILE_TYPE {
@@ -19,7 +20,8 @@ enum TILE_TYPE {
 var item_schedules = {
     ITEM_TYPE.SHOVEL: {price = 20, increment = 5},
     ITEM_TYPE.HEALTH: {price = 40, increment = 10},
-    ITEM_TYPE.COLLECTOR: {price = 100, increment = 50}
+    ITEM_TYPE.COLLECTOR: {price = 100, increment = 20},
+    ITEM_TYPE.SHOOTER: {price = 100, increment = 50}
 }
 
 const TILE_SIZE = 20

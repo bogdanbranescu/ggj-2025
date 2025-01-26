@@ -1,7 +1,10 @@
-[gd_scene load_steps=7 format=3 uid="uid://brnkvvapmt4rg"]
+[gd_scene load_steps=8 format=3 uid="uid://brnkvvapmt4rg"]
 
 [ext_resource type="Script" path="res://entities/Player.gd" id="1_yfawk"]
 [ext_resource type="Texture2D" uid="uid://j5dyyrm4aik2" path="res://entities/player/player.png" id="2_5m0uq"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_unu0q"]
+size = Vector2(18, 18)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_w1bxj"]
 atlas = ExtResource("2_5m0uq")
@@ -14,7 +17,7 @@ region = Rect2(20, 0, 20, 20)
 [sub_resource type="SpriteFrames" id="SpriteFrames_3ibvi"]
 animations = [{
 "frames": [{
-"duration": 0.5,
+"duration": 4.0,
 "texture": SubResource("AtlasTexture_w1bxj")
 }, {
 "duration": 0.5,
@@ -31,8 +34,15 @@ size = Vector2(18, 18)
 [node name="Player" type="CharacterBody2D"]
 script = ExtResource("1_yfawk")
 
+[node name="Area2D" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+position = Vector2(10, 10)
+shape = SubResource("RectangleShape2D_unu0q")
+
 [node name="Sprite" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_3ibvi")
+autoplay = "default"
 centered = false
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
@@ -56,3 +66,5 @@ target_position = Vector2(0, 20)
 [node name="RayCastRight" type="RayCast2D" parent="RayCasts"]
 position = Vector2(10, 10)
 target_position = Vector2(20, 0)
+
+[connection signal="area_entered" from="Area2D" to="." method="_on_area_2d_area_entered"]

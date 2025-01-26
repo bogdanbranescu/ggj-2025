@@ -1,4 +1,4 @@
-[gd_scene load_steps=34 format=4 uid="uid://cwrk5qs1xw8ww"]
+[gd_scene load_steps=37 format=4 uid="uid://cwrk5qs1xw8ww"]
 
 [ext_resource type="Script" path="res://world/World.gd" id="1_emwio"]
 [ext_resource type="Script" path="res://world/Timekeeper.gd" id="2_xpxpg"]
@@ -20,6 +20,7 @@
 [ext_resource type="Script" path="res://addons/godot_state_charts/compound_state.gd" id="13_yy8p7"]
 [ext_resource type="Script" path="res://addons/godot_state_charts/atomic_state.gd" id="14_nlpmn"]
 [ext_resource type="Script" path="res://addons/godot_state_charts/transition.gd" id="15_g86g8"]
+[ext_resource type="Texture2D" uid="uid://b0irkaufy1qgj" path="res://ui/health-bar.png" id="18_gt3ls"]
 [ext_resource type="PackedScene" uid="uid://cilb028n2qvvx" path="res://entities/shell/Shell.tscn" id="21_a6tww"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_fny0p"]
@@ -237,6 +238,14 @@ region = Rect2(0, 42, 14, 14)
 atlas = ExtResource("12_ykosg")
 region = Rect2(0, 0, 14, 14)
 
+[sub_resource type="AtlasTexture" id="AtlasTexture_ikdtq"]
+atlas = ExtResource("18_gt3ls")
+region = Rect2(0, 16, 36, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_prrnb"]
+atlas = ExtResource("18_gt3ls")
+region = Rect2(0, 0, 36, 16)
+
 [sub_resource type="AtlasTexture" id="AtlasTexture_gtnts"]
 atlas = ExtResource("12_ykosg")
 region = Rect2(0, 14, 14, 14)
@@ -334,7 +343,7 @@ text = "SHOP"
 horizontal_alignment = 1
 
 [node name="ShopFrame" type="NinePatchRect" parent="UI/UIContainer/SidePanel"]
-custom_minimum_size = Vector2(130, 40)
+custom_minimum_size = Vector2(132, 40)
 layout_mode = 2
 size_flags_vertical = 3
 texture = ExtResource("8_ydyjg")
@@ -425,24 +434,58 @@ size_flags_vertical = 8
 text = "50"
 horizontal_alignment = 2
 
+[node name="ItemShooter" type="HBoxContainer" parent="UI/UIContainer/SidePanel/ShopFrame/Shop"]
+layout_mode = 2
+focus_mode = 2
+script = ExtResource("13_nu4fb")
+type = 3
+
+[node name="Icon" type="TextureRect" parent="UI/UIContainer/SidePanel/ShopFrame/Shop/ItemShooter"]
+layout_mode = 2
+texture = SubResource("AtlasTexture_cw6wt")
+stretch_mode = 2
+flip_v = true
+
+[node name="Name" type="RichTextLabel" parent="UI/UIContainer/SidePanel/ShopFrame/Shop/ItemShooter"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Shooter
+"
+fit_content = true
+
+[node name="Price" type="Label" parent="UI/UIContainer/SidePanel/ShopFrame/Shop/ItemShooter"]
+layout_mode = 2
+size_flags_vertical = 8
+text = "50"
+horizontal_alignment = 2
+
 [node name="HP" type="HBoxContainer" parent="UI/UIContainer/SidePanel"]
 layout_mode = 2
 
 [node name="Icon" type="TextureRect" parent="UI/UIContainer/SidePanel/HP"]
 layout_mode = 2
+size_flags_vertical = 4
 texture = SubResource("AtlasTexture_n351o")
 stretch_mode = 2
 
 [node name="HealthBar" type="TextureProgressBar" parent="UI/UIContainer/SidePanel/HP"]
 unique_name_in_owner = true
+custom_minimum_size = Vector2(20, 16)
 layout_mode = 2
+size_flags_horizontal = 3
+value = 20.0
 nine_patch_stretch = true
+stretch_margin_left = 10
+stretch_margin_right = 10
+texture_under = SubResource("AtlasTexture_ikdtq")
+texture_progress = SubResource("AtlasTexture_prrnb")
 
 [node name="Bubbles" type="HBoxContainer" parent="UI/UIContainer/SidePanel"]
 layout_mode = 2
 
 [node name="Icon" type="TextureRect" parent="UI/UIContainer/SidePanel/Bubbles"]
 layout_mode = 2
+size_flags_vertical = 4
 texture = SubResource("AtlasTexture_gtnts")
 stretch_mode = 2
 

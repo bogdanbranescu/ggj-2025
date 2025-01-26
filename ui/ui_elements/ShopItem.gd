@@ -1,7 +1,7 @@
 extends HBoxContainer
 
 
-@export_enum("SHOVEL", "HEALTH", "COLLECTOR") var type : int
+@export_enum("SHOVEL", "HEALTH", "COLLECTOR", "SHOOTER") var type : int
 @onready var world = get_node(Global.world_path)
 
 var level := 0

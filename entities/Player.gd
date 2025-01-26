@@ -9,6 +9,12 @@ extends CharacterBody2D
 }
 
 
+# func _process(_delta: float) -> void:
+# 	var collision = move_and_collide(Vector2.ZERO)
+# 	if collision:
+# 		print(collision.get_collider())
+	
+
 func _input(_event: InputEvent) -> void:
 	var direction = Vector2.ZERO
 
@@ -42,3 +48,8 @@ func _on_swim_state_entered() -> void:
 func _on_swim_state_exited() -> void:
 	#set_process(false)
 	set_process_input(false)
+
+
+func _on_area_2d_area_entered(area: Area2D) -> void:
+	if area.type == Global.TILE_TYPE.BUBBLE:
+		area.interact_on_collision(self)

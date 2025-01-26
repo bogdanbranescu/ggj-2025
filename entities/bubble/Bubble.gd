@@ -10,17 +10,21 @@ func _ready() -> void:
 
 
 func tick_update():
-	var tilemap_position = get_parent().local_to_map(position)
-
 	if $RayCast.is_colliding():
 		interact_on_collision($RayCast.get_collider())
-		get_parent().remove_tile(tilemap_position)
 		return
 	
-	get_parent().place_tile(tilemap_position + Vector2i.UP, type)
-	get_parent().remove_tile(tilemap_position)
+	bubble_up()
 
 
 func interact_on_collision(collider_object: Node):
+	var tilemap_position = get_parent().local_to_map(position)
 	if collider_object.name == "Player":
 		world.current_bubbles += Global.BUBBLES_PER_BUBBLE
+	get_parent().remove_tile(tilemap_position)
+
+
+func bubble_up():
+	var tilemap_position = get_parent().local_to_map(position)
+	get_parent().place_tile(tilemap_position + Vector2i.UP, type)
+	get_parent().remove_tile(tilemap_position)
