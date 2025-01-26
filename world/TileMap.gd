@@ -60,6 +60,9 @@ func place_tile(location: Vector2i, type: int):
 		Global.TILE_TYPE.SHOOTER:
 			set_cell(location, 0, Vector2i(0, 0), 5)
 
+		Global.TILE_TYPE.SHELL:
+			set_cell(location, 0, Vector2i(0, 0), 3)
+
 		_:
 			print("INVALID TILE TYPE: ", type)
 

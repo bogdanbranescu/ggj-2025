@@ -33,3 +33,15 @@ func crossfade_music(from: AudioStreamPlayer2D, to: AudioStreamPlayer2D):
 
     tween_fade_out.tween_property(from, "volume_db", -80, 2)
     tween_fade_in.tween_property(to, "volume_db", 0, 2)
+
+
+func checkIfCanSpawnClam() -> bool:
+    var can_spawn = true;
+
+    var rng = RandomNumberGenerator.new()
+    rng.randomize()
+
+    if rng.randi() % 2 == 0:
+        can_spawn = false
+
+    return can_spawn;
