@@ -8,6 +8,7 @@ extends CharacterBody2D
 	Vector2.RIGHT: $RayCasts/RayCastRight
 }
 
+@onready var world = get_node(Global.world_path)
 
 # func _process(_delta: float) -> void:
 # 	var collision = move_and_collide(Vector2.ZERO)
@@ -29,6 +30,7 @@ func _input(_event: InputEvent) -> void:
 		$Sprite.flip_h = true
 	
 	elif Input.is_action_just_pressed("ui_right"):
+		handleOnTakeDamage()
 		direction = Vector2.RIGHT
 		$Sprite.flip_h = false
 
@@ -53,3 +55,7 @@ func _on_swim_state_exited() -> void:
 func _on_area_2d_area_entered(area: Area2D) -> void:
 	if area.type == Global.TILE_TYPE.BUBBLE:
 		area.interact_on_collision(self)
+
+
+func handleOnTakeDamage():
+	world.playerTakeDamage(1)
