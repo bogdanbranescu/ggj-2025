@@ -75,22 +75,29 @@ func set_type(cursor_type: int) -> void:
 
 
 func dig():
-	var map_position = %TileMapEntities.local_to_map(self.position)
-	var cell_data = %TileMapEntities.get_cell_tile_data(map_position)
-	var cell_data_above = %TileMapEntities.get_cell_tile_data(map_position + Vector2i.UP)
+	var tileMapEnts: TileMapLayer = %TileMapEntities;
+
+	var map_position = tileMapEnts.local_to_map(self.position)
+	var cell_data = tileMapEnts.get_cell_tile_data(map_position)
+	var cell_data_above = tileMapEnts.get_cell_tile_data(map_position + Vector2i.UP)
 
 	var is_sand = cell_data and cell_data.get_custom_data("is_sand")
 	var has_sand_above = cell_data_above and cell_data_above.get_custom_data("is_sand")
 	
 
-	if is_sand and not has_sand_above:
-		%TileMapEntities.remove_tile(map_position)
+	var currentCellId = tileMapEnts.get_cell_source_id(map_position + Vector2i.UP);
+	print("currentCellId: ", currentCellId);
+	var shell_id = 0;
+	var has_clam_at_top = currentCellId == shell_id;
+
+	if is_sand and not has_sand_above && !has_clam_at_top:
+		tileMapEnts.remove_tile(map_position)
 		%StateChart.send_event("end_placement")
 
 		if world.checkIfCanSpawnClam():
-			%TileMapEntities.place_tile(map_position, Global.TILE_TYPE.SHELL)
+			tileMapEnts.place_tile(map_position, Global.TILE_TYPE.SHELL)
 		else:
-			%TileMapEntities.place_tile(map_position, Global.TILE_TYPE.BUBBLE)
+			tileMapEnts.place_tile(map_position, Global.TILE_TYPE.BUBBLE)
 
 
 func place_shooter():
