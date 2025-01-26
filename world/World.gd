@@ -29,13 +29,17 @@ func playerTakeDamage(amount: int) -> void:
         %StateChart.send_event("go_to_lose_screen")
 
 
-func crossfade_music(phase: String):
-    match phase:
-        "peace":
-            get_tree().create_tween().tween_property($BGMAttack, "volume_db", -80, 4)
-            get_tree().create_tween().tween_property($BGMPeaceful, "volume_db", 0, 0.5)
-        "attack":
-            get_tree().create_tween().tween_property($BGMPeaceful, "volume_db", -80, 4)
-            get_tree().create_tween().tween_property($BGMAttack, "volume_db", 0, 0.5)            
-        _:
-            print("Incorrect BGM crossfading destination!")
+    tween_fade_out.tween_property(from, "volume_db", -80, 2)
+    tween_fade_in.tween_property(to, "volume_db", 0, 2)
+
+
+func checkIfCanSpawnClam() -> bool:
+    var can_spawn = true;
+
+    var rng = RandomNumberGenerator.new()
+    rng.randomize()
+
+    if rng.randi() % 2 == 0:
+        can_spawn = false
+
+    return can_spawn;

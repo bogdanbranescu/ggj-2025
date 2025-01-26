@@ -8,8 +8,9 @@ extends Area2D
 	Vector2.RIGHT: $RayCasts/RayCastRight
 }
 
-var type : int
+var type: int
 
+@onready var world = get_node(Global.world_path)
 
 func _ready() -> void:
 	set_process(false)
@@ -76,11 +77,17 @@ func dig():
 	var cell_data_above = %TileMapEntities.get_cell_tile_data(map_position + Vector2i.UP)
 
 	var is_sand = cell_data and cell_data.get_custom_data("is_sand")
-	var has_sand_above = cell_data_above and not cell_data_above.get_custom_data("is_sand")
+	var has_sand_above = cell_data_above and cell_data_above.get_custom_data("is_sand")
+	
 
 	if is_sand and not has_sand_above:
 		%TileMapEntities.remove_tile(map_position)
 		%StateChart.send_event("end_placement")
+
+		if world.checkIfCanSpawnClam():
+			%TileMapEntities.place_tile(map_position, Global.TILE_TYPE.SHELL)
+		else:
+			%TileMapEntities.place_tile(map_position, Global.TILE_TYPE.BUBBLE)
 
 
 func place_shooter():
