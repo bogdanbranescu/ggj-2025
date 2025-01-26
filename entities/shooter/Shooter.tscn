@@ -1,7 +1,8 @@
-[gd_scene load_steps=7 format=3 uid="uid://d2mof7nlwni8h"]
+[gd_scene load_steps=8 format=3 uid="uid://d2mof7nlwni8h"]
 
 [ext_resource type="Script" path="res://entities/shooter/Shooter.gd" id="1_aq45u"]
 [ext_resource type="Texture2D" uid="uid://2j76qhd65kks" path="res://entities/shooter/shooter.png" id="1_k37e0"]
+[ext_resource type="AudioStream" uid="uid://bxx0yypfup7ro" path="res://audio/Fire bubble.ogg" id="3_ctuub"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_wxxrb"]
 atlas = ExtResource("1_k37e0")
@@ -36,3 +37,6 @@ sprite_frames = SubResource("SpriteFrames_3n1a0")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("RectangleShape2D_5364s")
+
+[node name="SFX" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("3_ctuub")

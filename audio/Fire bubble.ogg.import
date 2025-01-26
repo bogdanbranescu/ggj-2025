@@ -1,0 +1,19 @@
+[remap]
+
+importer="oggvorbisstr"
+type="AudioStreamOggVorbis"
+uid="uid://bxx0yypfup7ro"
+path="res://.godot/imported/Fire bubble.ogg-540e87180d8b0d683a33b5e56dc19628.oggvorbisstr"
+
+[deps]
+
+source_file="res://audio/Fire bubble.ogg"
+dest_files=["res://.godot/imported/Fire bubble.ogg-540e87180d8b0d683a33b5e56dc19628.oggvorbisstr"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

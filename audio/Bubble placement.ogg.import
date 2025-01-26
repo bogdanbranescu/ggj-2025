@@ -1,0 +1,19 @@
+[remap]
+
+importer="oggvorbisstr"
+type="AudioStreamOggVorbis"
+uid="uid://dp4klrahwhgwe"
+path="res://.godot/imported/Bubble placement.ogg-b7dccdfe2b9eb4e86419894673fcd29a.oggvorbisstr"
+
+[deps]
+
+source_file="res://audio/Bubble placement.ogg"
+dest_files=["res://.godot/imported/Bubble placement.ogg-b7dccdfe2b9eb4e86419894673fcd29a.oggvorbisstr"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4
