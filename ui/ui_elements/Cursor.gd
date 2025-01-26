@@ -8,7 +8,7 @@ extends Area2D
 	Vector2.RIGHT: $RayCasts/RayCastRight
 }
 
-var type 
+var type : int
 
 
 func _ready() -> void:
@@ -53,3 +53,8 @@ func _on_placement_state_exited() -> void:
 	set_process(false)
 	set_process_input(false)
 	hide()
+
+
+func set_type(cursor_type: int) -> void:
+	type = cursor_type
+	

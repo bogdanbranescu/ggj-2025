@@ -1,4 +1,4 @@
-[gd_scene load_steps=39 format=4 uid="uid://cwrk5qs1xw8ww"]
+[gd_scene load_steps=40 format=4 uid="uid://cwrk5qs1xw8ww"]
 
 [ext_resource type="Script" path="res://world/World.gd" id="1_emwio"]
 [ext_resource type="Script" path="res://world/Timekeeper.gd" id="2_xpxpg"]
@@ -24,6 +24,7 @@
 [ext_resource type="PackedScene" uid="uid://cilb028n2qvvx" path="res://entities/shell/Shell.tscn" id="21_a6tww"]
 [ext_resource type="PackedScene" uid="uid://d2mof7nlwni8h" path="res://entities/shooter/Shooter.tscn" id="23_heydi"]
 [ext_resource type="PackedScene" uid="uid://ds6qdynkb6bou" path="res://entities/collector/Collector.tscn" id="24_1eyrg"]
+[ext_resource type="PackedScene" uid="uid://coyffxkcgwjc5" path="res://entities/bullet/Bullet.tscn" id="25_jlqvu"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_fny0p"]
 texture = ExtResource("6_3yexk")
@@ -83,6 +84,7 @@ scenes/2/scene = ExtResource("4_fqivv")
 scenes/3/scene = ExtResource("21_a6tww")
 scenes/4/scene = ExtResource("24_1eyrg")
 scenes/5/scene = ExtResource("23_heydi")
+scenes/6/scene = ExtResource("25_jlqvu")
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_yj5pe"]
 texture = ExtResource("6_3yexk")
