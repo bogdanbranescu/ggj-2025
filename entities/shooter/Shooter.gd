@@ -19,4 +19,4 @@ func shootAtOctopus():
 
 func make_bullet():
     var tilemap_position = get_parent().local_to_map(position)
-    get_parent().place_tile(tilemap_position + Vector2i.UP, Global.TILE_TYPE.BUBBLE)
+    get_parent().place_tile(tilemap_position + Vector2i.UP, Global.TILE_TYPE.BULLET)

@@ -52,7 +52,7 @@ func place_tile(location: Vector2i, type: int):
 			set_cell(location, 0, Vector2i(0, 0), 2)
 
 		Global.TILE_TYPE.BULLET:
-			set_cell(location, 0, Vector2i(0, 0), 2)
+			set_cell(location, 0, Vector2i(0, 0), 6)
 			
 
 		_:
