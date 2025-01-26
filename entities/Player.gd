@@ -30,7 +30,6 @@ func _input(_event: InputEvent) -> void:
 		$Sprite.flip_h = true
 	
 	elif Input.is_action_just_pressed("ui_right"):
-		handleOnTakeDamage()
 		direction = Vector2.RIGHT
 		$Sprite.flip_h = false
 
