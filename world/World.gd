@@ -12,6 +12,9 @@ func _ready() -> void:
 	$BGMAttack.volume_db = -80
 	$BGMAttack.play()
 
+	current_hp = 100;
+	%HealthBar.value = current_hp
+
 
 func _process(_delta: float) -> void:
 	%BubbleCount.text = str(current_bubbles)
@@ -35,7 +38,7 @@ func crossfade_music(phase: String):
 			get_tree().create_tween().tween_property($BGMPeaceful, "volume_db", 0, 0.5)
 		"attack":
 			get_tree().create_tween().tween_property($BGMPeaceful, "volume_db", -80, 4)
-			get_tree().create_tween().tween_property($BGMAttack, "volume_db", 0, 0.5)            
+			get_tree().create_tween().tween_property($BGMAttack, "volume_db", 0, 0.5)
 		_:
 			print("Incorrect BGM crossfading destination!")
 
