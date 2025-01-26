@@ -28,6 +28,7 @@ var item_schedules = {
 const TILE_SIZE = 20
 const MAX_HP = 100
 const BUBBLES_PER_BUBBLE = 1
+const BUBBLES_PER_COLLECTOR = 2;
 const HEAL_AMOUNT = 20
 const DAMAGE_PER_OCTOPUS_HIT = 5
 const SHELL_INTERVAL = 4
