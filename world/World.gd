@@ -2,7 +2,7 @@ extends Node2D
 
 
 var current_bubbles := 1000
-var current_hp := 20#Global.MAX_HP
+var current_hp := 20 # Global.MAX_HP
 
 
 func _ready() -> void:
@@ -20,6 +20,12 @@ func heal(amount: int) -> void:
     current_hp = clamp(current_hp + amount, 0, 100)
     %HealthBar.value = current_hp
 
+func playerTakeDamage(amount: int) -> void:
+    current_hp = clamp(current_hp - amount, 0, 100)
+    %HealthBar.value = current_hp
+
+    if current_hp <= 0:
+        %StateChart.send_event("go_to_lose_screen")
 
 func crossfade_music(from: AudioStreamPlayer2D, to: AudioStreamPlayer2D):
     var tween_fade_out = get_tree().create_tween()

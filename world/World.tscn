@@ -1,4 +1,4 @@
-[gd_scene load_steps=40 format=4 uid="uid://cwrk5qs1xw8ww"]
+[gd_scene load_steps=42 format=4 uid="uid://cwrk5qs1xw8ww"]
 
 [ext_resource type="Script" path="res://world/World.gd" id="1_emwio"]
 [ext_resource type="Script" path="res://world/Timekeeper.gd" id="2_xpxpg"]
@@ -22,7 +22,9 @@
 [ext_resource type="Script" path="res://addons/godot_state_charts/transition.gd" id="15_g86g8"]
 [ext_resource type="Texture2D" uid="uid://b0irkaufy1qgj" path="res://ui/health-bar.png" id="18_gt3ls"]
 [ext_resource type="PackedScene" uid="uid://cilb028n2qvvx" path="res://entities/shell/Shell.tscn" id="21_a6tww"]
+[ext_resource type="Script" path="res://ui/lose_screen.gd" id="22_f3dp0"]
 [ext_resource type="PackedScene" uid="uid://d2mof7nlwni8h" path="res://entities/shooter/Shooter.tscn" id="23_heydi"]
+[ext_resource type="Texture2D" uid="uid://c3ic7c0dacfu0" path="res://ui/menu-frame-filled-9patch.png" id="23_hqcij"]
 [ext_resource type="PackedScene" uid="uid://ds6qdynkb6bou" path="res://entities/collector/Collector.tscn" id="24_1eyrg"]
 [ext_resource type="PackedScene" uid="uid://coyffxkcgwjc5" path="res://entities/bullet/Bullet.tscn" id="25_jlqvu"]
 
@@ -530,6 +532,44 @@ size_flags_horizontal = 3
 text = "56"
 horizontal_alignment = 2
 
+[node name="Lose_Screen" type="Control" parent="UI"]
+visible = false
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = SubResource("Theme_0rton")
+script = ExtResource("22_f3dp0")
+
+[node name="NinePatchRect" type="NinePatchRect" parent="UI/Lose_Screen"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("23_hqcij")
+
+[node name="RichTextLabel" type="RichTextLabel" parent="UI/Lose_Screen"]
+layout_mode = 0
+offset_left = 165.0
+offset_top = 97.0
+offset_right = 324.0
+offset_bottom = 124.0
+pivot_offset = Vector2(78, 13)
+text = "Mr octopus got you"
+
+[node name="Restart_Text" type="RichTextLabel" parent="UI/Lose_Screen"]
+layout_mode = 0
+offset_left = 133.0
+offset_top = 116.0
+offset_right = 354.0
+offset_bottom = 142.0
+pivot_offset = Vector2(110, 12)
+text = "Refresh page to restart game"
+
 [node name="StateChart" type="Node" parent="."]
 unique_name_in_owner = true
 script = ExtResource("12_8mk8q")
@@ -548,6 +588,12 @@ to = NodePath("../../Shop")
 event = &"go_to_shop"
 delay_in_seconds = "0.0"
 
+[node name="toLoseScreen" type="Node" parent="StateChart/Mode/Swim"]
+script = ExtResource("15_g86g8")
+to = NodePath("../../LoseGame")
+event = &"go_to_lose_screen"
+delay_in_seconds = "0.0"
+
 [node name="Shop" type="Node" parent="StateChart/Mode"]
 script = ExtResource("14_nlpmn")
 
@@ -563,6 +609,12 @@ to = NodePath("../../Placement")
 event = &"go_to_placement"
 delay_in_seconds = "0.0"
 
+[node name="toLoseScreen" type="Node" parent="StateChart/Mode/Shop"]
+script = ExtResource("15_g86g8")
+to = NodePath("../../LoseGame")
+event = &"go_to_lose_screen"
+delay_in_seconds = "0.0"
+
 [node name="Placement" type="Node" parent="StateChart/Mode"]
 script = ExtResource("14_nlpmn")
 
@@ -572,6 +624,15 @@ to = NodePath("../../Swim")
 event = &"end_placement"
 delay_in_seconds = "0.0"
 
+[node name="toLoseScreen" type="Node" parent="StateChart/Mode/Placement"]
+script = ExtResource("15_g86g8")
+to = NodePath("../../LoseGame")
+event = &"go_to_lose_screen"
+delay_in_seconds = "0.0"
+
+[node name="LoseGame" type="Node" parent="StateChart/Mode"]
+script = ExtResource("14_nlpmn")
+
 [connection signal="timeout" from="Timekeeper/Ticker" to="Timekeeper" method="_on_ticker_timeout"]
 [connection signal="state_entered" from="StateChart/Mode/Swim" to="Player" method="_on_swim_state_entered"]
 [connection signal="state_exited" from="StateChart/Mode/Swim" to="Player" method="_on_swim_state_exited"]
@@ -579,3 +640,4 @@ delay_in_seconds = "0.0"
 [connection signal="state_exited" from="StateChart/Mode/Shop" to="UI/UIContainer/SidePanel/ShopFrame/Shop" method="_on_shop_state_exited"]
 [connection signal="state_entered" from="StateChart/Mode/Placement" to="Cursor" method="_on_placement_state_entered"]
 [connection signal="state_exited" from="StateChart/Mode/Placement" to="Cursor" method="_on_placement_state_exited"]
+[connection signal="state_entered" from="StateChart/Mode/LoseGame" to="UI/Lose_Screen" method="_on_lose_game_state_entered"]
