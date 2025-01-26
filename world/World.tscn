@@ -1,4 +1,4 @@
-[gd_scene load_steps=40 format=4 uid="uid://cwrk5qs1xw8ww"]
+[gd_scene load_steps=41 format=4 uid="uid://cwrk5qs1xw8ww"]
 
 [ext_resource type="Script" path="res://world/World.gd" id="1_emwio"]
 [ext_resource type="Script" path="res://world/Timekeeper.gd" id="2_xpxpg"]
@@ -22,6 +22,7 @@
 [ext_resource type="Script" path="res://addons/godot_state_charts/transition.gd" id="15_g86g8"]
 [ext_resource type="Texture2D" uid="uid://b0irkaufy1qgj" path="res://ui/health-bar.png" id="18_gt3ls"]
 [ext_resource type="PackedScene" uid="uid://cilb028n2qvvx" path="res://entities/shell/Shell.tscn" id="21_a6tww"]
+[ext_resource type="Script" path="res://ui/lose_screen.gd" id="22_f3dp0"]
 [ext_resource type="PackedScene" uid="uid://d2mof7nlwni8h" path="res://entities/shooter/Shooter.tscn" id="23_heydi"]
 [ext_resource type="PackedScene" uid="uid://ds6qdynkb6bou" path="res://entities/collector/Collector.tscn" id="24_1eyrg"]
 [ext_resource type="PackedScene" uid="uid://coyffxkcgwjc5" path="res://entities/bullet/Bullet.tscn" id="25_jlqvu"]
@@ -528,6 +529,41 @@ layout_mode = 2
 size_flags_horizontal = 3
 text = "56"
 horizontal_alignment = 2
+
+[node name="Lose_Screen" type="Control" parent="UI"]
+visible = false
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = SubResource("Theme_0rton")
+script = ExtResource("22_f3dp0")
+
+[node name="NinePatchRect" type="NinePatchRect" parent="UI/Lose_Screen"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="RichTextLabel" type="RichTextLabel" parent="UI/Lose_Screen"]
+layout_mode = 0
+offset_left = 113.0
+offset_top = 101.0
+offset_right = 272.0
+offset_bottom = 128.0
+text = "Mr octopus got you"
+
+[node name="Restart_Text" type="RichTextLabel" parent="UI/Lose_Screen"]
+layout_mode = 0
+offset_left = 81.0
+offset_top = 120.0
+offset_right = 302.0
+offset_bottom = 146.0
+text = "Refresh page to restart game"
 
 [node name="StateChart" type="Node" parent="."]
 unique_name_in_owner = true
