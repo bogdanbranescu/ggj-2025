@@ -1,8 +1,10 @@
-[gd_scene load_steps=44 format=4 uid="uid://cwrk5qs1xw8ww"]
+[gd_scene load_steps=46 format=4 uid="uid://cwrk5qs1xw8ww"]
 
 [ext_resource type="Script" path="res://world/World.gd" id="1_emwio"]
+[ext_resource type="AudioStream" uid="uid://b07sdki0ejnj8" path="res://audio/GGJ2025_PeaceMode.ogg" id="2_c1atx"]
 [ext_resource type="Script" path="res://world/OctopusAI.gd" id="2_ue2tg"]
 [ext_resource type="Script" path="res://world/Timekeeper.gd" id="2_xpxpg"]
+[ext_resource type="AudioStream" uid="uid://b4pvqfj0n40p3" path="res://audio/GGJ2025_AttackMode.ogg" id="3_6u1kq"]
 [ext_resource type="Texture2D" uid="uid://lwifrcyguclf" path="res://world/world-mock.png" id="3_7aspd"]
 [ext_resource type="PackedScene" uid="uid://bxcafepx7jj3p" path="res://entities/bubble/Bubble.tscn" id="4_fqivv"]
 [ext_resource type="PackedScene" uid="uid://brnkvvapmt4rg" path="res://entities/player/Player.tscn" id="5_lgqo4"]
@@ -282,13 +284,14 @@ region = Rect2(0, 14, 14, 14)
 [node name="World" type="Node2D"]
 script = ExtResource("1_emwio")
 
-[node name="OctopusAI" type="Node" parent="."]
-script = ExtResource("2_ue2tg")
-
 [node name="BGMPeaceful" type="AudioStreamPlayer2D" parent="."]
-volume_db = -80.0
+stream = ExtResource("2_c1atx")
 
 [node name="BGMAttack" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("3_6u1kq")
+
+[node name="OctopusAI" type="Node" parent="."]
+script = ExtResource("2_ue2tg")
 
 [node name="Timekeeper" type="Node" parent="."]
 unique_name_in_owner = true

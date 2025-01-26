@@ -6,6 +6,7 @@ var current_hp := 20 # Global.MAX_HP
 
 
 func _ready() -> void:
+    $BGMAttack.volume_db = 0
     $BGMPeaceful.play()
 
     $BGMAttack.volume_db = -80
@@ -27,9 +28,14 @@ func playerTakeDamage(amount: int) -> void:
     if current_hp <= 0:
         %StateChart.send_event("go_to_lose_screen")
 
-func crossfade_music(from: AudioStreamPlayer2D, to: AudioStreamPlayer2D):
-    var tween_fade_out = get_tree().create_tween()
-    var tween_fade_in = get_tree().create_tween()
 
-    tween_fade_out.tween_property(from, "volume_db", -80, 2)
-    tween_fade_in.tween_property(to, "volume_db", 0, 2)
+func crossfade_music(phase: String):
+    match phase:
+        "peace":
+            get_tree().create_tween().tween_property($BGMAttack, "volume_db", -80, 4)
+            get_tree().create_tween().tween_property($BGMPeaceful, "volume_db", 0, 0.5)
+        "attack":
+            get_tree().create_tween().tween_property($BGMPeaceful, "volume_db", -80, 4)
+            get_tree().create_tween().tween_property($BGMAttack, "volume_db", 0, 0.5)            
+        _:
+            print("Incorrect BGM crossfading destination!")
