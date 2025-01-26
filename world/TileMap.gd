@@ -55,6 +55,8 @@ func place_tile(location: Vector2i, type: int):
 			set_cell(location, 0, Vector2i(0, 0), 6)
 			
 
+		
+
 		_:
 			print("INVALID TILE TYPE: ", type)
 

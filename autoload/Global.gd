@@ -5,7 +5,7 @@ enum ITEM_TYPE {
     SHOVEL,
     HEALTH,
     COLLECTOR,
-    SHOOTER
+    SHOOTER,
 }
 
 enum TILE_TYPE {

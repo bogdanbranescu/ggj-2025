@@ -29,6 +29,10 @@ func _input(_event: InputEvent) -> void:
 		print(type)
 		handle_buy()
 
+	if Input.is_action_just_pressed("cancel") and has_focus():
+		print(type)
+		%StateChart.send_event("end_shop")
+
 
 func handle_buy():
 	if world.current_bubbles < price:
@@ -39,20 +43,21 @@ func handle_buy():
 	match type:
 		Global.ITEM_TYPE.HEALTH:
 			world.heal(Global.HEAL_AMOUNT)
+			%StateChart.send_event("end_shop")
 
 		Global.ITEM_TYPE.SHOVEL:
 			print("SHOVEL")
-			%Cursor.type = Global.ITEM_TYPE.SHOVEL
+			%Cursor.set_type(Global.ITEM_TYPE.SHOVEL)
 			%StateChart.send_event("go_to_placement")
 
 		Global.ITEM_TYPE.COLLECTOR:
 			print("COLLECTOR")
-			%Cursor.type = Global.ITEM_TYPE.COLLECTOR
+			%Cursor.set_type(Global.ITEM_TYPE.COLLECTOR)
 			%StateChart.send_event("go_to_placement")
 
 		Global.ITEM_TYPE.SHOOTER:
 			print("SHOOTER")
-			%Cursor.type = Global.ITEM_TYPE.SHOOTER
+			%Cursor.set_type(Global.ITEM_TYPE.SHOOTER)
 			%StateChart.send_event("go_to_placement")
 
 		_:

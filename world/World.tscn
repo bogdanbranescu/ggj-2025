@@ -318,7 +318,7 @@ script = ExtResource("9_uq3ip")
 [node name="Sprite" type="Sprite2D" parent="Cursor"]
 texture = ExtResource("10_lktij")
 centered = false
-hframes = 2
+hframes = 4
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Cursor"]
 position = Vector2(10, 10)
@@ -398,6 +398,7 @@ offset_top = 12.0
 offset_right = -10.0
 offset_bottom = -12.0
 script = ExtResource("12_641mc")
+metadata/_edit_use_anchors_ = true
 
 [node name="ItemShovel" type="HBoxContainer" parent="UI/UIContainer/SidePanel/ShopFrame/Shop"]
 layout_mode = 2
