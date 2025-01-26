@@ -21,10 +21,15 @@ func interact_on_collision(collider_object: Node):
 	var tile_source_id = tileLayer.get_cell_source_id(tilemap_position + Vector2i.UP)
 
 	var outOfBoundsTileId = 1; # Had to debug it to figure that out
+	var urchinTileId = 0;
+
+	# print("Tile source id: ", tile_source_id)
 
 	if (tile_source_id == outOfBoundsTileId):
 		EventBus.octopus_take_damage.emit()
-
+	elif (tile_source_id == urchinTileId):
+		# erase urchin tile
+		tileLayer.set_cell(tilemap_position + Vector2i.UP, -1)
 
 	get_parent().remove_tile(tilemap_position)
 
