@@ -1,0 +1,38 @@
+[gd_scene load_steps=7 format=3 uid="uid://ds6qdynkb6bou"]
+
+[ext_resource type="Texture2D" uid="uid://x2oaa8s648ww" path="res://entities/collector/collector.png" id="1_hemyv"]
+[ext_resource type="Script" path="res://entities/collector/Collector.gd" id="1_mcuyt"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_8fo3n"]
+size = Vector2(18, 18)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_d0ni8"]
+atlas = ExtResource("1_hemyv")
+region = Rect2(0, 0, 20, 20)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_dsun6"]
+atlas = ExtResource("1_hemyv")
+region = Rect2(20, 0, 20, 20)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_iax4m"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_d0ni8")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_dsun6")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[node name="Collector" type="StaticBody2D"]
+script = ExtResource("1_mcuyt")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_8fo3n")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_iax4m")

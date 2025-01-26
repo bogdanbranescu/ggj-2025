@@ -1,0 +1,38 @@
+[gd_scene load_steps=7 format=3 uid="uid://d2mof7nlwni8h"]
+
+[ext_resource type="Script" path="res://entities/shooter/Shooter.gd" id="1_aq45u"]
+[ext_resource type="Texture2D" uid="uid://2j76qhd65kks" path="res://entities/shooter/shooter.png" id="1_k37e0"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_wxxrb"]
+atlas = ExtResource("1_k37e0")
+region = Rect2(0, 0, 20, 20)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_npfhe"]
+atlas = ExtResource("1_k37e0")
+region = Rect2(20, 0, 20, 20)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_3n1a0"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_wxxrb")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_npfhe")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_5364s"]
+size = Vector2(18, 18)
+
+[node name="Shooter" type="StaticBody2D"]
+script = ExtResource("1_aq45u")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_3n1a0")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_5364s")
