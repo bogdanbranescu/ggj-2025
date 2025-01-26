@@ -1,4 +1,4 @@
-[gd_scene load_steps=46 format=4 uid="uid://cwrk5qs1xw8ww"]
+[gd_scene load_steps=47 format=4 uid="uid://cwrk5qs1xw8ww"]
 
 [ext_resource type="Script" path="res://world/World.gd" id="1_emwio"]
 [ext_resource type="AudioStream" uid="uid://b07sdki0ejnj8" path="res://audio/GGJ2025_PeaceMode.ogg" id="2_c1atx"]
@@ -25,6 +25,7 @@
 [ext_resource type="Script" path="res://addons/godot_state_charts/transition.gd" id="15_g86g8"]
 [ext_resource type="Texture2D" uid="uid://c0s1prf00u2i8" path="res://ui/octopus.png" id="16_veoqc"]
 [ext_resource type="Texture2D" uid="uid://b0irkaufy1qgj" path="res://ui/health-bar.png" id="18_gt3ls"]
+[ext_resource type="AudioStream" uid="uid://dp4klrahwhgwe" path="res://audio/Bubble placement.ogg" id="18_vfg23"]
 [ext_resource type="PackedScene" uid="uid://cilb028n2qvvx" path="res://entities/shell/Shell.tscn" id="21_a6tww"]
 [ext_resource type="Script" path="res://ui/lose_screen.gd" id="22_f3dp0"]
 [ext_resource type="PackedScene" uid="uid://d2mof7nlwni8h" path="res://entities/shooter/Shooter.tscn" id="23_heydi"]
@@ -286,9 +287,11 @@ script = ExtResource("1_emwio")
 
 [node name="BGMPeaceful" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource("2_c1atx")
+parameters/looping = true
 
 [node name="BGMAttack" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource("3_6u1kq")
+parameters/looping = true
 
 [node name="OctopusAI" type="Node" parent="."]
 script = ExtResource("2_ue2tg")
@@ -351,6 +354,9 @@ target_position = Vector2(0, 20)
 [node name="RayCastRight" type="RayCast2D" parent="Cursor/RayCasts"]
 position = Vector2(10, 10)
 target_position = Vector2(20, 0)
+
+[node name="SFX" type="AudioStreamPlayer2D" parent="Cursor"]
+stream = ExtResource("18_vfg23")
 
 [node name="UI" type="CanvasLayer" parent="."]
 

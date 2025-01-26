@@ -12,7 +12,7 @@ dest_files=["res://.godot/imported/GGJ2025_AttackMode.ogg-0f98f9451c830d7d4b6bb6
 
 [params]
 
-loop=false
+loop=true
 loop_offset=0
 bpm=0
 beat_count=0

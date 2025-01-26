@@ -42,12 +42,15 @@ func _input(_event: InputEvent) -> void:
 		match type:
 			Global.ITEM_TYPE.SHOVEL:
 				dig()
+				$SFX.play()
 	
 			Global.ITEM_TYPE.COLLECTOR:
 				place_collector()
+				$SFX.play()
 		
 			Global.ITEM_TYPE.SHOOTER:
 				place_shooter()
+				$SFX.play()
 	
 	if Input.is_action_just_pressed("cancel"):
 		print("CURSOR CANCEL")
