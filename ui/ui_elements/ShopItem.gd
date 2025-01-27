@@ -2,26 +2,38 @@ extends HBoxContainer
 
 
 @export_enum("SHOVEL", "HEALTH", "COLLECTOR", "SHOOTER") var type : int
+
 @onready var world = get_node(Global.world_path)
+@onready var price_label = $Price as Label
+@onready var product_label = $Name as Label
 
 var level := 0
 var price: int
+
+var is_affordable := false
 
 
 func _ready() -> void:
 	focus_entered.connect(select)
 	focus_exited.connect(deselect)
 
+	EventBus.bubbles_changed.connect(adjust_color)
+
 	price = Global.item_schedules[type].price + level * Global.item_schedules[type].increment
 	$Price.text = str(price)
+	adjust_color(0)
 
 
 func select() -> void:
-	modulate = Color.BLUE
+	%ShopItemSelectorUI.global_position.y = global_position.y - 4
+	if is_affordable:
+		%ShopItemSelectorUI.region_rect.position.x = 0
+	else:
+		%ShopItemSelectorUI.region_rect.position.x = 20.0
 
 
 func deselect() -> void:
-	modulate = Color.WHITE
+	pass
 
 
 func _input(_event: InputEvent) -> void:
@@ -66,8 +78,12 @@ func handle_buy():
 	release_focus()
 
 
-# func deduct_price():
-# 	if world.current_bubbles < price:
-# 		return
-
-# 	world.current_bubbles -= price
+func adjust_color(bubble_count: int):
+	if price <= bubble_count:
+		is_affordable = true
+		price_label.add_theme_color_override("font_color", Global.COLORS.TEXT_AVAILABLE)
+		product_label.add_theme_color_override("font_color", Global.COLORS.TEXT_AVAILABLE)
+	else:
+		is_affordable = false
+		price_label.add_theme_color_override("font_color", Global.COLORS.TEXT_UNAVAILABLE)
+		product_label.add_theme_color_override("font_color", Global.COLORS.TEXT_UNAVAILABLE)

@@ -1,7 +1,13 @@
 extends Node2D
 
 
-var current_bubbles := 0
+var current_bubbles := 0:
+	set(value):
+		current_bubbles = value
+		%BubbleCount.text = str(current_bubbles)
+		EventBus.bubbles_changed.emit(current_bubbles)
+
+
 var current_hp := 100 # Global.MAX_HP
 
 var shake_offset := Vector2.ZERO
@@ -22,8 +28,6 @@ func _ready() -> void:
 
 
 func _process(_delta: float) -> void:
-	%BubbleCount.text = str(current_bubbles)
-
 	position = Vector2.ZERO
 	if is_shaking:
 		shake_screen()
@@ -33,12 +37,14 @@ func heal(amount: int) -> void:
 	current_hp = clamp(current_hp + amount, 0, 100)
 	%HealthBar.value = current_hp
 
+
 func playerTakeDamage(amount: int) -> void:
 	current_hp = clamp(current_hp - amount, 0, 100)
 	%HealthBar.value = current_hp
 
 	if current_hp <= 0:
 		%StateChart.send_event("go_to_lose_screen")
+
 
 func crossfade_music(phase: String):
 	match phase:

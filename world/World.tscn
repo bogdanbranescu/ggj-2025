@@ -1,4 +1,4 @@
-[gd_scene load_steps=47 format=4 uid="uid://cwrk5qs1xw8ww"]
+[gd_scene load_steps=48 format=4 uid="uid://cwrk5qs1xw8ww"]
 
 [ext_resource type="Script" path="res://world/World.gd" id="1_emwio"]
 [ext_resource type="AudioStream" uid="uid://b07sdki0ejnj8" path="res://audio/GGJ2025_PeaceMode.ogg" id="2_c1atx"]
@@ -27,11 +27,12 @@
 [ext_resource type="Texture2D" uid="uid://b0irkaufy1qgj" path="res://ui/health-bar.png" id="18_gt3ls"]
 [ext_resource type="AudioStream" uid="uid://dp4klrahwhgwe" path="res://audio/Bubble placement.ogg" id="18_vfg23"]
 [ext_resource type="PackedScene" uid="uid://cilb028n2qvvx" path="res://entities/shell/Shell.tscn" id="21_a6tww"]
-[ext_resource type="Script" path="res://ui/lose_screen.gd" id="22_f3dp0"]
 [ext_resource type="PackedScene" uid="uid://d2mof7nlwni8h" path="res://entities/shooter/Shooter.tscn" id="23_heydi"]
 [ext_resource type="Texture2D" uid="uid://bqkxmvfkumepg" path="res://ui/menu-frame-filled-9patch.png" id="23_hqcij"]
 [ext_resource type="PackedScene" uid="uid://ds6qdynkb6bou" path="res://entities/collector/Collector.tscn" id="24_1eyrg"]
 [ext_resource type="PackedScene" uid="uid://coyffxkcgwjc5" path="res://entities/bullet/Bullet.tscn" id="25_jlqvu"]
+[ext_resource type="Texture2D" uid="uid://v8tgcgqx1x7s" path="res://ui/selection-frame-9patch.png" id="26_y5eru"]
+[ext_resource type="Script" path="res://ui/EndScreen.gd" id="27_el0x5"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_fny0p"]
 texture = ExtResource("6_3yexk")
@@ -262,6 +263,10 @@ region = Rect2(0, 16, 36, 16)
 atlas = ExtResource("18_gt3ls")
 region = Rect2(0, 0, 36, 16)
 
+[sub_resource type="AtlasTexture" id="AtlasTexture_gtnts"]
+atlas = ExtResource("12_ykosg")
+region = Rect2(0, 14, 14, 14)
+
 [sub_resource type="AtlasTexture" id="AtlasTexture_ih7ni"]
 atlas = ExtResource("12_ykosg")
 region = Rect2(0, 28, 14, 14)
@@ -278,10 +283,6 @@ region = Rect2(0, 42, 14, 14)
 atlas = ExtResource("12_ykosg")
 region = Rect2(0, 0, 14, 14)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_gtnts"]
-atlas = ExtResource("12_ykosg")
-region = Rect2(0, 14, 14, 14)
-
 [node name="World" type="Node2D"]
 script = ExtResource("1_emwio")
 
@@ -294,6 +295,7 @@ stream = ExtResource("3_6u1kq")
 parameters/looping = true
 
 [node name="OctopusAI" type="Node" parent="."]
+unique_name_in_owner = true
 script = ExtResource("2_ue2tg")
 
 [node name="Timekeeper" type="Node" parent="."]
@@ -447,20 +449,40 @@ theme = SubResource("Theme_0rton")
 [node name="SidePanel" type="VBoxContainer" parent="UI/UIContainer"]
 layout_mode = 2
 
-[node name="ShopTitle" type="HBoxContainer" parent="UI/UIContainer/SidePanel"]
+[node name="Bubbles" type="HBoxContainer" parent="UI/UIContainer/SidePanel"]
 layout_mode = 2
 
-[node name="ButtonHint" type="TextureRect" parent="UI/UIContainer/SidePanel/ShopTitle"]
+[node name="ShopTitle" type="HBoxContainer" parent="UI/UIContainer/SidePanel/Bubbles"]
+layout_mode = 2
+
+[node name="ButtonHint" type="TextureRect" parent="UI/UIContainer/SidePanel/Bubbles/ShopTitle"]
 layout_mode = 2
 size_flags_horizontal = 6
 size_flags_vertical = 0
 texture = ExtResource("9_knilg")
 
-[node name="Text" type="Label" parent="UI/UIContainer/SidePanel/ShopTitle"]
+[node name="Text" type="Label" parent="UI/UIContainer/SidePanel/Bubbles/ShopTitle"]
 layout_mode = 2
 size_flags_horizontal = 2
 text = "SHOP"
 horizontal_alignment = 1
+
+[node name="Icon" type="TextureRect" parent="UI/UIContainer/SidePanel/Bubbles"]
+layout_mode = 2
+size_flags_horizontal = 10
+size_flags_vertical = 4
+texture = SubResource("AtlasTexture_gtnts")
+stretch_mode = 2
+
+[node name="BubbleCount" type="Label" parent="UI/UIContainer/SidePanel/Bubbles"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "56"
+horizontal_alignment = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="UI/UIContainer/SidePanel/Bubbles"]
+custom_minimum_size = Vector2(7, 0)
+layout_mode = 2
 
 [node name="ShopFrame" type="NinePatchRect" parent="UI/UIContainer/SidePanel"]
 custom_minimum_size = Vector2(132, 40)
@@ -475,15 +497,36 @@ patch_margin_bottom = 12
 axis_stretch_horizontal = 1
 axis_stretch_vertical = 1
 
+[node name="ShopItemSelectorUI" type="NinePatchRect" parent="UI/UIContainer/SidePanel/ShopFrame"]
+unique_name_in_owner = true
+visible = false
+custom_minimum_size = Vector2(20, 22)
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 1.0
+offset_left = 6.0
+offset_right = -6.0
+offset_bottom = 22.0
+grow_horizontal = 2
+texture = ExtResource("26_y5eru")
+region_rect = Rect2(0, 0, 20, 20)
+patch_margin_left = 3
+patch_margin_top = 3
+patch_margin_right = 3
+patch_margin_bottom = 3
+axis_stretch_horizontal = 1
+axis_stretch_vertical = 1
+
 [node name="Shop" type="VBoxContainer" parent="UI/UIContainer/SidePanel/ShopFrame"]
 layout_mode = 1
 anchors_preset = -1
 anchor_right = 1.0
-anchor_bottom = 1.0
 offset_left = 10.0
-offset_top = 12.0
+offset_top = 16.0
 offset_right = -10.0
-offset_bottom = -12.0
+offset_bottom = 76.0
+grow_horizontal = 2
+theme_override_constants/separation = 6
 script = ExtResource("12_641mc")
 metadata/_edit_use_anchors_ = true
 
@@ -497,11 +540,10 @@ layout_mode = 2
 texture = SubResource("AtlasTexture_ih7ni")
 stretch_mode = 2
 
-[node name="Name" type="RichTextLabel" parent="UI/UIContainer/SidePanel/ShopFrame/Shop/ItemShovel"]
+[node name="Name" type="Label" parent="UI/UIContainer/SidePanel/ShopFrame/Shop/ItemShovel"]
 layout_mode = 2
 size_flags_horizontal = 3
 text = "Shovel"
-fit_content = true
 
 [node name="Price" type="Label" parent="UI/UIContainer/SidePanel/ShopFrame/Shop/ItemShovel"]
 layout_mode = 2
@@ -520,11 +562,10 @@ layout_mode = 2
 texture = SubResource("AtlasTexture_w1emr")
 stretch_mode = 2
 
-[node name="Name" type="RichTextLabel" parent="UI/UIContainer/SidePanel/ShopFrame/Shop/ItemHealth"]
+[node name="Name" type="Label" parent="UI/UIContainer/SidePanel/ShopFrame/Shop/ItemHealth"]
 layout_mode = 2
 size_flags_horizontal = 3
 text = "Health"
-fit_content = true
 
 [node name="Price" type="Label" parent="UI/UIContainer/SidePanel/ShopFrame/Shop/ItemHealth"]
 layout_mode = 2
@@ -543,11 +584,10 @@ layout_mode = 2
 texture = SubResource("AtlasTexture_cw6wt")
 stretch_mode = 2
 
-[node name="Name" type="RichTextLabel" parent="UI/UIContainer/SidePanel/ShopFrame/Shop/ItemCollector"]
+[node name="Name" type="Label" parent="UI/UIContainer/SidePanel/ShopFrame/Shop/ItemCollector"]
 layout_mode = 2
 size_flags_horizontal = 3
 text = "Collector"
-fit_content = true
 
 [node name="Price" type="Label" parent="UI/UIContainer/SidePanel/ShopFrame/Shop/ItemCollector"]
 layout_mode = 2
@@ -567,12 +607,11 @@ texture = SubResource("AtlasTexture_cw6wt")
 stretch_mode = 2
 flip_v = true
 
-[node name="Name" type="RichTextLabel" parent="UI/UIContainer/SidePanel/ShopFrame/Shop/ItemShooter"]
+[node name="Name" type="Label" parent="UI/UIContainer/SidePanel/ShopFrame/Shop/ItemShooter"]
 layout_mode = 2
 size_flags_horizontal = 3
 text = "Shooter
 "
-fit_content = true
 
 [node name="Price" type="Label" parent="UI/UIContainer/SidePanel/ShopFrame/Shop/ItemShooter"]
 layout_mode = 2
@@ -601,24 +640,9 @@ stretch_margin_right = 10
 texture_under = SubResource("AtlasTexture_ikdtq")
 texture_progress = SubResource("AtlasTexture_prrnb")
 
-[node name="Bubbles" type="HBoxContainer" parent="UI/UIContainer/SidePanel"]
-layout_mode = 2
-
-[node name="Icon" type="TextureRect" parent="UI/UIContainer/SidePanel/Bubbles"]
-layout_mode = 2
-size_flags_vertical = 4
-texture = SubResource("AtlasTexture_gtnts")
-stretch_mode = 2
-
-[node name="BubbleCount" type="Label" parent="UI/UIContainer/SidePanel/Bubbles"]
-unique_name_in_owner = true
-layout_mode = 2
-size_flags_horizontal = 3
-text = "56"
-horizontal_alignment = 2
-
-[node name="Lose_Screen" type="Control" parent="UI"]
+[node name="LoseScreen" type="Control" parent="UI"]
 visible = false
+z_index = 2
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -626,34 +650,99 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 theme = SubResource("Theme_0rton")
-script = ExtResource("22_f3dp0")
+script = ExtResource("27_el0x5")
 
-[node name="NinePatchRect" type="NinePatchRect" parent="UI/Lose_Screen"]
+[node name="NinePatchRect" type="NinePatchRect" parent="UI/LoseScreen"]
+custom_minimum_size = Vector2(280, 160)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -14.0
+offset_top = -14.0
+offset_right = 14.0
+offset_bottom = 14.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("23_hqcij")
+patch_margin_left = 14
+patch_margin_top = 14
+patch_margin_right = 14
+patch_margin_bottom = 14
+axis_stretch_horizontal = 1
+axis_stretch_vertical = 1
+
+[node name="VBoxContainer" type="CenterContainer" parent="UI/LoseScreen/NinePatchRect"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+
+[node name="LoseText" type="Label" parent="UI/LoseScreen/NinePatchRect/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+text = "Mr Octopus got you!
+
+Refresh page to restart game"
+horizontal_alignment = 1
+
+[node name="WinScreen" type="Control" parent="UI"]
+visible = false
+z_index = 2
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = SubResource("Theme_0rton")
+script = ExtResource("27_el0x5")
+
+[node name="NinePatchRect" type="NinePatchRect" parent="UI/WinScreen"]
+custom_minimum_size = Vector2(280, 160)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -14.0
+offset_top = -14.0
+offset_right = 14.0
+offset_bottom = 14.0
+grow_horizontal = 2
+grow_vertical = 2
 texture = ExtResource("23_hqcij")
+patch_margin_left = 14
+patch_margin_top = 14
+patch_margin_right = 14
+patch_margin_bottom = 14
+axis_stretch_horizontal = 1
+axis_stretch_vertical = 1
 
-[node name="RichTextLabel" type="RichTextLabel" parent="UI/Lose_Screen"]
-layout_mode = 0
-offset_left = 165.0
-offset_top = 97.0
-offset_right = 324.0
-offset_bottom = 124.0
-pivot_offset = Vector2(78, 13)
-text = "Mr octopus got you"
+[node name="VBoxContainer" type="CenterContainer" parent="UI/WinScreen/NinePatchRect"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
 
-[node name="Restart_Text" type="RichTextLabel" parent="UI/Lose_Screen"]
-layout_mode = 0
-offset_left = 133.0
-offset_top = 116.0
-offset_right = 354.0
-offset_bottom = 142.0
-pivot_offset = Vector2(110, 12)
-text = "Refresh page to restart game"
+[node name="WinText" type="Label" parent="UI/WinScreen/NinePatchRect/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+text = "You win!
+
+But Mr Octopus will be back!
+(it's kind of a friendly thing,
+ you're both cool with it)
+
+Refresh page to restart game"
+horizontal_alignment = 1
 
 [node name="StateChart" type="Node" parent="."]
 unique_name_in_owner = true
@@ -679,6 +768,12 @@ to = NodePath("../../LoseGame")
 event = &"go_to_lose_screen"
 delay_in_seconds = "0.0"
 
+[node name="toWinGame" type="Node" parent="StateChart/Mode/Swim"]
+script = ExtResource("15_g86g8")
+to = NodePath("../../WinGame")
+event = &"go_to_win_screen"
+delay_in_seconds = "0.0"
+
 [node name="Shop" type="Node" parent="StateChart/Mode"]
 script = ExtResource("14_nlpmn")
 
@@ -700,6 +795,12 @@ to = NodePath("../../LoseGame")
 event = &"go_to_lose_screen"
 delay_in_seconds = "0.0"
 
+[node name="toWinGame" type="Node" parent="StateChart/Mode/Shop"]
+script = ExtResource("15_g86g8")
+to = NodePath("../../WinGame")
+event = &"go_to_win_screen"
+delay_in_seconds = "0.0"
+
 [node name="Placement" type="Node" parent="StateChart/Mode"]
 script = ExtResource("14_nlpmn")
 
@@ -715,7 +816,16 @@ to = NodePath("../../LoseGame")
 event = &"go_to_lose_screen"
 delay_in_seconds = "0.0"
 
+[node name="toWinGame" type="Node" parent="StateChart/Mode/Placement"]
+script = ExtResource("15_g86g8")
+to = NodePath("../../WinGame")
+event = &"go_to_win_screen"
+delay_in_seconds = "0.0"
+
 [node name="LoseGame" type="Node" parent="StateChart/Mode"]
+script = ExtResource("14_nlpmn")
+
+[node name="WinGame" type="Node" parent="StateChart/Mode"]
 script = ExtResource("14_nlpmn")
 
 [connection signal="timeout" from="Timekeeper/Ticker" to="Timekeeper" method="_on_ticker_timeout"]
@@ -725,4 +835,5 @@ script = ExtResource("14_nlpmn")
 [connection signal="state_exited" from="StateChart/Mode/Shop" to="UI/UIContainer/SidePanel/ShopFrame/Shop" method="_on_shop_state_exited"]
 [connection signal="state_entered" from="StateChart/Mode/Placement" to="Cursor" method="_on_placement_state_entered"]
 [connection signal="state_exited" from="StateChart/Mode/Placement" to="Cursor" method="_on_placement_state_exited"]
-[connection signal="state_entered" from="StateChart/Mode/LoseGame" to="UI/Lose_Screen" method="_on_lose_game_state_entered"]
+[connection signal="state_entered" from="StateChart/Mode/LoseGame" to="UI/LoseScreen" method="_on_lose_game_state_entered"]
+[connection signal="state_entered" from="StateChart/Mode/WinGame" to="UI/WinScreen" method="_on_win_game_state_entered"]

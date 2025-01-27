@@ -6,4 +6,3 @@ var type := Global.TILE_TYPE.COLLECTOR
 
 func interact_on_collision():
 	world.current_bubbles += Global.BUBBLES_PER_COLLECTOR
-	pass ;

@@ -1,6 +1,13 @@
 extends Node
 
 
+var IS_DEBUGGING = true
+
+const COLORS = {
+    TEXT_AVAILABLE = Color("c0d1cc"),
+    TEXT_UNAVAILABLE = Color("603b3a"),
+}
+
 enum ITEM_TYPE {
     SHOVEL,
     HEALTH,

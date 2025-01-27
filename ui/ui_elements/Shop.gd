@@ -5,18 +5,23 @@ func _ready() -> void:
 	set_process(false)
 	set_process_input(false)
 
+	%ShopItemSelectorUI.hide()
+
+
 
 func _on_shop_state_entered() -> void:
 	set_process(true)
 	set_process_input(true)
 
 	get_children()[0].grab_focus()
-	# TODO show cursor
+	%ShopItemSelectorUI.show()
 
 
 func _on_shop_state_exited() -> void:
 	set_process(false)
 	set_process_input(false)
+
+	%ShopItemSelectorUI.hide()
 
 
 func _process(_delta: float) -> void:

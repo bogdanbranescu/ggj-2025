@@ -13,3 +13,7 @@ func _process(delta: float) -> void:
 
 func _on_lose_game_state_entered() -> void:
 	visible = true
+
+
+func _on_win_game_state_entered() -> void:
+	visible = true
