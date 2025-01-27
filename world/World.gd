@@ -24,9 +24,9 @@ func _ready() -> void:
 func _process(_delta: float) -> void:
 	%BubbleCount.text = str(current_bubbles)
 
+	position = Vector2.ZERO
 	if is_shaking:
 		shake_screen()
-		get_tree().create_tween().tween_property($BGMAttack, "volume_db", -80, 4)
 
 
 func heal(amount: int) -> void:
@@ -69,7 +69,6 @@ func start_shaking_screen():
 	get_tree().create_tween().tween_callback(
 		func():
 			is_shaking = false
-			shake_offset = Vector2.ZERO
 	).set_delay(0.6)
 
 
