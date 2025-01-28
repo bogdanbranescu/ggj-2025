@@ -8,15 +8,17 @@ func interact_on_collision():
 	shootAtOctopus()
 	pass
 
-
 func shootAtOctopus():
-	print("Shooter shooting at octopus")
 	make_bullet()
+	handle_play_on_shoot()
 	$SFX.play()
-
-	pass
 
 
 func make_bullet():
 	var tilemap_position = get_parent().local_to_map(position)
 	get_parent().place_tile(tilemap_position + Vector2i.UP, Global.TILE_TYPE.BULLET)
+
+func handle_play_on_shoot():
+	$"AnimatedSprite2D".frame = 1
+	await get_tree().create_timer(0.5).timeout
+	$"AnimatedSprite2D".frame = 0
