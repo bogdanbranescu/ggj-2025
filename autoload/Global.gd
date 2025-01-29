@@ -25,11 +25,27 @@ enum TILE_TYPE {
     BULLET,
 }
 
-var item_schedules = {
-    ITEM_TYPE.SHOVEL: {price = 10, increment = 5},
-    ITEM_TYPE.HEALTH: {price = 25, increment = 10},
-    ITEM_TYPE.COLLECTOR: {price = 30, increment = 20},
-    ITEM_TYPE.SHOOTER: {price = 40, increment = 50}
+var item_data = {
+    ITEM_TYPE.SHOVEL: {
+        price = 10,
+        increment = 5,
+        description = "Remove one sand patch",
+    },
+    ITEM_TYPE.HEALTH: {
+        price = 25,
+        increment = 10,
+        description = "Restore " + str(Global.HEAL_AMOUNT) + " HP",
+    },
+    ITEM_TYPE.COLLECTOR:
+        {price = 30,
+        increment = 20,
+        description = "Collects incoming bubbles\n(value x 2)",
+    },
+    ITEM_TYPE.SHOOTER: {
+        price = 40,
+        increment = 20,
+        description = "Turns incoming bubbles into bullets",
+    },
 }
 
 const TILE_SIZE = 20

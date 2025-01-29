@@ -19,7 +19,7 @@ func _ready() -> void:
 
 	EventBus.bubbles_changed.connect(adjust_color)
 
-	price = Global.item_schedules[type].price + level * Global.item_schedules[type].increment
+	price = Global.item_data[type].price + level * Global.item_data[type].increment
 	$Price.text = str(price)
 	adjust_color(0)
 

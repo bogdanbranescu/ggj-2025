@@ -8,7 +8,7 @@ var current_bubbles := 0:
 		EventBus.bubbles_changed.emit(current_bubbles)
 
 
-var current_hp := 100 # Global.MAX_HP
+var current_hp
 
 var shake_offset := Vector2.ZERO
 var is_shaking := false
@@ -23,8 +23,8 @@ func _ready() -> void:
 	$BGMAttack.volume_db = -80
 	$BGMAttack.play()
 
-	current_hp = 100;
-	%HealthBar.value = current_hp
+	current_hp = Global.MAX_HP
+	update_health_bar()
 
 	current_bubbles = 0
 
@@ -37,12 +37,17 @@ func _process(_delta: float) -> void:
 
 func heal(amount: int) -> void:
 	current_hp = clamp(current_hp + amount, 0, 100)
+
+
+func update_health_bar() -> void:
 	%HealthBar.value = current_hp
+	%HealthBar/Text.text = str(current_hp) + "/" + str(Global.MAX_HP)
 
 
 func playerTakeDamage(amount: int) -> void:
 	current_hp = clamp(current_hp - amount, 0, 100)
-	%HealthBar.value = current_hp
+	update_health_bar()
+
 
 	if current_hp <= 0:
 		%StateChart.send_event("go_to_lose_screen")
