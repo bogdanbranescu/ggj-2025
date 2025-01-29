@@ -26,6 +26,8 @@ func _ready() -> void:
 
 func select() -> void:
 	%ShopItemSelectorUI.global_position.y = global_position.y - 4
+	%ItemDescription.text = Global.item_data[type].description
+
 	if is_affordable:
 		%ShopItemSelectorUI.region_rect.position.x = 0
 	else:
