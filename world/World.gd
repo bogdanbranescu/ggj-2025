@@ -26,6 +26,8 @@ func _ready() -> void:
 	current_hp = 100;
 	%HealthBar.value = current_hp
 
+	current_bubbles = 0
+
 
 func _process(_delta: float) -> void:
 	position = Vector2.ZERO
