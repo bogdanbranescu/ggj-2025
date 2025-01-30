@@ -28,6 +28,8 @@ func _ready() -> void:
 
 	current_bubbles = 0
 
+	get_tree().paused = true
+
 
 func _process(_delta: float) -> void:
 	position = Vector2.ZERO

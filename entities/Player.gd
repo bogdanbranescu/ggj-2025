@@ -47,12 +47,10 @@ func _input(_event: InputEvent) -> void:
 
 
 func _on_swim_state_entered() -> void:
-	#set_process(false)
 	set_process_input(true)
 
 
 func _on_swim_state_exited() -> void:
-	#set_process(false)
 	set_process_input(false)
 
 

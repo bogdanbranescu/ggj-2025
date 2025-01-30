@@ -1,4 +1,4 @@
-[gd_scene load_steps=50 format=4 uid="uid://cwrk5qs1xw8ww"]
+[gd_scene load_steps=51 format=4 uid="uid://cwrk5qs1xw8ww"]
 
 [ext_resource type="Script" path="res://world/World.gd" id="1_emwio"]
 [ext_resource type="AudioStream" uid="uid://b07sdki0ejnj8" path="res://audio/GGJ2025_PeaceMode.ogg" id="2_c1atx"]
@@ -35,6 +35,7 @@
 [ext_resource type="Texture2D" uid="uid://v8tgcgqx1x7s" path="res://ui/selection-frame-9patch.png" id="26_y5eru"]
 [ext_resource type="Script" path="res://ui/EndScreen.gd" id="27_el0x5"]
 [ext_resource type="FontFile" uid="uid://cojonw7sgwf3k" path="res://ui/fonts/depixel/DePixelBreit.ttf" id="29_x124v"]
+[ext_resource type="Script" path="res://ui/StartScreen.gd" id="30_oyor2"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_fny0p"]
 texture = ExtResource("6_3yexk")
@@ -286,6 +287,7 @@ atlas = ExtResource("12_ykosg")
 region = Rect2(0, 0, 14, 14)
 
 [node name="World" type="Node2D"]
+process_mode = 1
 script = ExtResource("1_emwio")
 
 [node name="BGMPeaceful" type="AudioStreamPlayer2D" parent="."]
@@ -672,6 +674,60 @@ theme_override_fonts/font = ExtResource("29_x124v")
 theme_override_font_sizes/font_size = 9
 text = "1/100"
 
+[node name="StartScreen" type="Control" parent="UI"]
+process_mode = 2
+z_index = 2
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = SubResource("Theme_0rton")
+script = ExtResource("30_oyor2")
+
+[node name="NinePatchRect" type="NinePatchRect" parent="UI/StartScreen"]
+custom_minimum_size = Vector2(280, 160)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -14.0
+offset_top = -14.0
+offset_right = 14.0
+offset_bottom = 14.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("23_hqcij")
+patch_margin_left = 14
+patch_margin_top = 14
+patch_margin_right = 14
+patch_margin_bottom = 14
+axis_stretch_horizontal = 1
+axis_stretch_vertical = 1
+
+[node name="VBoxContainer" type="CenterContainer" parent="UI/StartScreen/NinePatchRect"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="LoseText" type="Label" parent="UI/StartScreen/NinePatchRect/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+text = "~~~ Bubbled Out ~~~
+
+Arrow Keys - move
+Z - buy and place objects
+X - enter/exit shop
+
+Press Z to start"
+horizontal_alignment = 1
+
 [node name="LoseScreen" type="Control" parent="UI"]
 visible = false
 z_index = 2
@@ -778,12 +834,22 @@ horizontal_alignment = 1
 
 [node name="StateChart" type="Node" parent="."]
 unique_name_in_owner = true
+process_mode = 3
 script = ExtResource("12_8mk8q")
 track_in_editor = true
 
 [node name="Mode" type="Node" parent="StateChart"]
 script = ExtResource("13_yy8p7")
-initial_state = NodePath("Swim")
+initial_state = NodePath("StartScreen")
+
+[node name="StartScreen" type="Node" parent="StateChart/Mode"]
+script = ExtResource("14_nlpmn")
+
+[node name="toSwim" type="Node" parent="StateChart/Mode/StartScreen"]
+script = ExtResource("15_g86g8")
+to = NodePath("../../Swim")
+event = &"go_to_swim"
+delay_in_seconds = "0.0"
 
 [node name="Swim" type="Node" parent="StateChart/Mode"]
 script = ExtResource("14_nlpmn")
