@@ -16,6 +16,8 @@ var is_shaking := false
 
 func _ready() -> void:
 	EventBus.octopus_attacked.connect(start_shaking_screen)
+	EventBus.crossfade_music.connect(crossfade_music.bind("attack"))
+
 
 	$BGMAttack.volume_db = -30
 	$BGMPeaceful.play()
@@ -67,6 +69,8 @@ func crossfade_music(phase: String):
 			get_tree().create_tween().tween_property($BGMAttack, "volume_db", -30, 0.8)
 		_:
 			print("Incorrect BGM crossfading destination!")
+
+	get_tree().create_tween().tween_callback(crossfade_music.bind("peace")).set_delay(5.0)
 
 
 func checkIfCanSpawnClam() -> bool:
