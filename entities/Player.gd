@@ -15,12 +15,6 @@ func _ready() -> void:
 	EventBus.octopus_attacked.connect(handleOnTakeDamage)
 
 
-# func _process(_delta: float) -> void:
-# 	var collision = move_and_collide(Vector2.ZERO)
-# 	if collision:
-# 		print(collision.get_collider())
-	
-
 func _input(_event: InputEvent) -> void:
 	var direction = Vector2.ZERO
 

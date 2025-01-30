@@ -1,13 +1,16 @@
 extends Node
 
 
-@export var tick_delta := 0.5
 var current_tick_count := 0
-var music_anticipation_window := 4
+var pregen_horizon := 60
+
+
+var upcoming_actions := []
 
 
 func _ready() -> void:
-	$Ticker.wait_time = tick_delta
+	$Ticker.wait_time = Global.tick_delta
+	unpack_schedule()
 
 
 func start() -> void:
@@ -19,12 +22,45 @@ func pause() -> void:
 
 
 func _on_ticker_timeout() -> void:
+	$Ticker.wait_time = Global.tick_delta
 	EventBus.tick.emit()
 	current_tick_count += 1
 
-	if current_tick_count >= Global.TICKS_PER_PEACE_PHASE:
-		EventBus.octopus_attacked.emit()
-		current_tick_count = 0
+	handle_attack_music()
+	handle_octopus_action()
 
-	elif Global.TICKS_PER_PEACE_PHASE - current_tick_count == music_anticipation_window:
+	upcoming_actions.pop_front()
+
+	if upcoming_actions.size()< pregen_horizon:
+		unpack_schedule()
+		
+
+func unpack_schedule():
+	while upcoming_actions.size() < pregen_horizon:
+		var new_schedule = %OctopusAI.schedule_action()
+		upcoming_actions.append_array(extract_actions_from_schedule(new_schedule))
+
+
+func extract_actions_from_schedule(action_schedule: Dictionary) -> Array:
+	var action_type = action_schedule.type
+
+	var new_actions = []
+	for i in range(action_schedule.duration):
+		new_actions.append(action_type)
+	
+	return new_actions
+
+
+func handle_octopus_action():
+	match upcoming_actions[0]:
+		Global.OCTOPUS_ACTION.ATTACK_PLAYER:
+			EventBus.octopus_attacked.emit()
+		Global.OCTOPUS_ACTION.HEAL:
+			EventBus.octopus_healed.emit()
+		_:
+			pass
+			
+
+func handle_attack_music():
+	if upcoming_actions[Global.MUSIC_ANTICIPATION_WINDOW] == Global.OCTOPUS_ACTION.ATTACK_PLAYER:
 		EventBus.crossfade_music.emit()

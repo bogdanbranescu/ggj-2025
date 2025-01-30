@@ -19,7 +19,12 @@ func _input(_event: InputEvent) -> void:
 	elif Input.is_action_just_pressed("remove_octopus_hp"):	# [
 		octopus.handle_take_damage(10)
 
-	if Input.is_action_just_pressed("add_bubbles"):			#2
+	if Input.is_action_just_pressed("add_bubbles"):			# 2
 		world.current_bubbles += 20
-	elif Input.is_action_just_pressed("remove_bubbles"):	#1
+	elif Input.is_action_just_pressed("remove_bubbles"):	# 1
 		world.current_bubbles -= 20
+
+	if Input.is_action_pressed("speed_up"):			# Q
+		Global.tick_delta = 0.05
+	else:
+		Global.tick_delta = 0.5

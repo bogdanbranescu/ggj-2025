@@ -28,6 +28,8 @@ func _ready() -> void:
 
 	current_bubbles = 0
 
+	%OctopusAI.set_strategy("basic")
+
 	get_tree().paused = true
 
 

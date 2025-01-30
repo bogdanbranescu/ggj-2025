@@ -389,7 +389,7 @@ frame = 1
 layout_mode = 2
 
 [node name="MarginContainer" type="MarginContainer" parent="UI/OctopusUI/OctopusHP"]
-custom_minimum_size = Vector2(0, 10)
+custom_minimum_size = Vector2(0, 6)
 layout_mode = 2
 
 [node name="OctopusHealthBar" type="TextureProgressBar" parent="UI/OctopusUI/OctopusHP"]
@@ -407,6 +407,21 @@ texture_progress = SubResource("AtlasTexture_prrnb")
 
 [node name="MarginContainer" type="MarginContainer" parent="UI/OctopusUI"]
 custom_minimum_size = Vector2(10, 10)
+layout_mode = 2
+
+[node name="UpcomingText" type="VBoxContainer" parent="UI/OctopusUI"]
+layout_mode = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="UI/OctopusUI/UpcomingText"]
+custom_minimum_size = Vector2(0, 8)
+layout_mode = 2
+
+[node name="Text" type="Label" parent="UI/OctopusUI/UpcomingText"]
+layout_mode = 2
+text = "Next"
+
+[node name="MarginContainer2" type="MarginContainer" parent="UI/OctopusUI"]
+custom_minimum_size = Vector2(0, 10)
 layout_mode = 2
 
 [node name="TimelineContainer" type="VBoxContainer" parent="UI/OctopusUI"]

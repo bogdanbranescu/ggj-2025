@@ -3,6 +3,8 @@ extends Node
 
 var IS_DEBUGGING = true
 
+var tick_delta := 0.5
+
 const COLORS = {
     TEXT_AVAILABLE = Color("c0d1cc"),
     TEXT_UNAVAILABLE = Color("603b3a"),
@@ -23,6 +25,13 @@ enum TILE_TYPE {
     SAND,
     SHELL,
     BULLET,
+}
+
+enum OCTOPUS_ACTION {
+	IDLE,
+	ATTACK_PLAYER,
+	ATTACK_OBJECT,
+	HEAL,
 }
 
 var item_data = {
@@ -55,8 +64,9 @@ const BUBBLES_PER_COLLECTOR = 2
 const HEAL_AMOUNT = 20
 const DAMAGE_PER_OCTOPUS_HIT = 8
 const SHELL_INTERVAL = 3
-const TICKS_PER_PEACE_PHASE := 40
 const BULLET_DAMAGE := 1
+
+var MUSIC_ANTICIPATION_WINDOW := 4
 
 
 var world_path = "/root/World"
