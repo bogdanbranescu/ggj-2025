@@ -43,6 +43,7 @@ func _process(_delta: float) -> void:
 
 func heal(amount: int) -> void:
 	current_hp = clamp(current_hp + amount, 0, 100)
+	update_health_bar()
 
 
 func update_health_bar() -> void:
