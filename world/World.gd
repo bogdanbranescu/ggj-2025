@@ -68,10 +68,9 @@ func crossfade_music(phase: String):
 		"attack":
 			get_tree().create_tween().tween_property($BGMPeaceful, "volume_db", -80, 3.0).set_trans(Tween.TRANS_EXPO)
 			get_tree().create_tween().tween_property($BGMAttack, "volume_db", -30, 0.8)
+			get_tree().create_tween().tween_callback(crossfade_music.bind("peace")).set_delay(5.0)
 		_:
 			print("Incorrect BGM crossfading destination!")
-
-	get_tree().create_tween().tween_callback(crossfade_music.bind("peace")).set_delay(5.0)
 
 
 func checkIfCanSpawnClam() -> bool:
