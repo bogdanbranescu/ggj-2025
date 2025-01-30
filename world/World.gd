@@ -56,11 +56,11 @@ func playerTakeDamage(amount: int) -> void:
 func crossfade_music(phase: String):
 	match phase:
 		"peace":
-			get_tree().create_tween().tween_property($BGMAttack, "volume_db", -80, 4)
-			get_tree().create_tween().tween_property($BGMPeaceful, "volume_db", 0, 0.5)
+			get_tree().create_tween().tween_property($BGMAttack, "volume_db", -80, 3.0).set_trans(Tween.TRANS_EXPO)
+			get_tree().create_tween().tween_property($BGMPeaceful, "volume_db", 0, 0.8)
 		"attack":
-			get_tree().create_tween().tween_property($BGMPeaceful, "volume_db", -80, 4)
-			get_tree().create_tween().tween_property($BGMAttack, "volume_db", 0, 0.5)
+			get_tree().create_tween().tween_property($BGMPeaceful, "volume_db", -80, 3.0).set_trans(Tween.TRANS_EXPO)
+			get_tree().create_tween().tween_property($BGMAttack, "volume_db", 0, 0.8)
 		_:
 			print("Incorrect BGM crossfading destination!")
 

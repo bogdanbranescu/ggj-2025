@@ -3,7 +3,7 @@ extends Node
 
 @export var tick_delta := 0.5
 var current_tick_count := 0
-var music_anticipation_window := 6
+var music_anticipation_window := 4
 
 
 func _ready() -> void:

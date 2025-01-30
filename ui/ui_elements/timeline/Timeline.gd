@@ -50,7 +50,7 @@ func tick_update() -> void:
 		if i <= all_markers[i].icon_frame_horizon:
 			all_markers[i].update_icon(i)
 		else:
-			all_markers[i].update_icon((marker_count - i) / 2.0 + 1.0)
+			all_markers[i].update_icon((marker_count - i) + 1.0)
 
 
 func adjust_section():
