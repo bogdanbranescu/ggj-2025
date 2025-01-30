@@ -17,7 +17,7 @@ var is_shaking := false
 func _ready() -> void:
 	EventBus.octopus_attacked.connect(start_shaking_screen)
 
-	$BGMAttack.volume_db = 0
+	$BGMAttack.volume_db = -30
 	$BGMPeaceful.play()
 
 	$BGMAttack.volume_db = -80
@@ -61,10 +61,10 @@ func crossfade_music(phase: String):
 	match phase:
 		"peace":
 			get_tree().create_tween().tween_property($BGMAttack, "volume_db", -80, 3.0).set_trans(Tween.TRANS_EXPO)
-			get_tree().create_tween().tween_property($BGMPeaceful, "volume_db", 0, 0.8)
+			get_tree().create_tween().tween_property($BGMPeaceful, "volume_db", -30, 0.8)
 		"attack":
 			get_tree().create_tween().tween_property($BGMPeaceful, "volume_db", -80, 3.0).set_trans(Tween.TRANS_EXPO)
-			get_tree().create_tween().tween_property($BGMAttack, "volume_db", 0, 0.8)
+			get_tree().create_tween().tween_property($BGMAttack, "volume_db", -30, 0.8)
 		_:
 			print("Incorrect BGM crossfading destination!")
 
