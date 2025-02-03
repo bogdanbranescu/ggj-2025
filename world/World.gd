@@ -8,7 +8,7 @@ var current_bubbles := 0:
 		EventBus.bubbles_changed.emit(current_bubbles)
 
 
-var current_hp := 100 # Global.MAX_HP
+var current_hp
 
 var shake_offset := Vector2.ZERO
 var is_shaking := false
@@ -16,15 +16,23 @@ var is_shaking := false
 
 func _ready() -> void:
 	EventBus.octopus_attacked.connect(start_shaking_screen)
+	EventBus.crossfade_music.connect(crossfade_music.bind("attack"))
 
-	$BGMAttack.volume_db = 0
+
+	$BGMAttack.volume_db = -30
 	$BGMPeaceful.play()
 
 	$BGMAttack.volume_db = -80
 	$BGMAttack.play()
 
-	current_hp = 100;
-	%HealthBar.value = current_hp
+	current_hp = Global.MAX_HP
+	update_health_bar()
+
+	current_bubbles = 0
+
+	%OctopusAI.set_strategy("basic")
+
+	get_tree().paused = true
 
 
 func _process(_delta: float) -> void:
@@ -35,12 +43,18 @@ func _process(_delta: float) -> void:
 
 func heal(amount: int) -> void:
 	current_hp = clamp(current_hp + amount, 0, 100)
+	update_health_bar()
+
+
+func update_health_bar() -> void:
 	%HealthBar.value = current_hp
+	%HealthBar/Text.text = str(current_hp) + "/" + str(Global.MAX_HP)
 
 
 func playerTakeDamage(amount: int) -> void:
 	current_hp = clamp(current_hp - amount, 0, 100)
-	%HealthBar.value = current_hp
+	update_health_bar()
+
 
 	if current_hp <= 0:
 		%StateChart.send_event("go_to_lose_screen")
@@ -49,11 +63,12 @@ func playerTakeDamage(amount: int) -> void:
 func crossfade_music(phase: String):
 	match phase:
 		"peace":
-			get_tree().create_tween().tween_property($BGMAttack, "volume_db", -80, 4)
-			get_tree().create_tween().tween_property($BGMPeaceful, "volume_db", 0, 0.5)
+			get_tree().create_tween().tween_property($BGMAttack, "volume_db", -80, 3.0).set_trans(Tween.TRANS_EXPO)
+			get_tree().create_tween().tween_property($BGMPeaceful, "volume_db", -30, 0.8)
 		"attack":
-			get_tree().create_tween().tween_property($BGMPeaceful, "volume_db", -80, 4)
-			get_tree().create_tween().tween_property($BGMAttack, "volume_db", 0, 0.5)
+			get_tree().create_tween().tween_property($BGMPeaceful, "volume_db", -80, 3.0).set_trans(Tween.TRANS_EXPO)
+			get_tree().create_tween().tween_property($BGMAttack, "volume_db", -30, 0.8)
+			get_tree().create_tween().tween_callback(crossfade_music.bind("peace")).set_delay(5.0)
 		_:
 			print("Incorrect BGM crossfading destination!")
 

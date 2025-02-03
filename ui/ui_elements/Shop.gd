@@ -6,6 +6,7 @@ func _ready() -> void:
 	set_process_input(false)
 
 	%ShopItemSelectorUI.hide()
+	%ItemDescription.text = ""
 
 
 
@@ -22,6 +23,7 @@ func _on_shop_state_exited() -> void:
 	set_process_input(false)
 
 	%ShopItemSelectorUI.hide()
+	%ItemDescription.text = ""
 
 
 func _process(_delta: float) -> void:

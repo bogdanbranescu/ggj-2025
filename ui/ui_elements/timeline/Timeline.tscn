@@ -1,0 +1,98 @@
+[gd_scene load_steps=5 format=3 uid="uid://wj37gycavr2"]
+
+[ext_resource type="Script" path="res://ui/ui_elements/timeline/Timeline.gd" id="1_85m6k"]
+[ext_resource type="Texture2D" uid="uid://3fktjgwllxne" path="res://ui/ui_elements/timeline/indicator.png" id="2_n1ndh"]
+[ext_resource type="Texture2D" uid="uid://co83kdhbn7qag" path="res://ui/ui_elements/timeline/marker-mask.png" id="3_265ul"]
+[ext_resource type="Texture2D" uid="uid://p5j17bn8nv18" path="res://ui/ui_elements/timeline/timeline-frame.png" id="4_ew0uf"]
+
+[node name="Timeline" type="Control"]
+custom_minimum_size = Vector2(141, 0)
+layout_mode = 3
+anchors_preset = 0
+offset_left = 100.0
+offset_top = 100.0
+offset_right = 221.0
+offset_bottom = 121.0
+size_flags_vertical = 3
+script = ExtResource("1_85m6k")
+
+[node name="Masks" type="Control" parent="."]
+z_index = 1
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="MaskLeft" type="TextureRect" parent="Masks"]
+z_index = 1
+layout_mode = 1
+anchors_preset = -1
+offset_left = -6.0
+offset_top = 3.0
+offset_right = 24.0
+offset_bottom = 18.0
+texture = ExtResource("3_265ul")
+stretch_mode = 2
+
+[node name="Indicator" type="TextureRect" parent="Masks"]
+z_index = 2
+layout_mode = 2
+offset_left = 14.0
+offset_right = 21.0
+offset_bottom = 21.0
+texture = ExtResource("2_n1ndh")
+stretch_mode = 2
+
+[node name="MaskRight" type="TextureRect" parent="Masks"]
+z_index = 1
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -16.0
+offset_top = 3.0
+offset_right = 6.0
+offset_bottom = 18.0
+grow_horizontal = 0
+texture = ExtResource("3_265ul")
+stretch_mode = 2
+flip_h = true
+
+[node name="MarkerContainer" type="Control" parent="."]
+custom_minimum_size = Vector2(0, 21)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="NinePatchRect" type="NinePatchRect" parent="MarkerContainer"]
+z_index = 2
+custom_minimum_size = Vector2(0, 21)
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_bottom = 21.0
+grow_horizontal = 2
+texture = ExtResource("4_ew0uf")
+draw_center = false
+region_rect = Rect2(1, 1, 18, 18)
+patch_margin_left = 6
+patch_margin_top = 6
+patch_margin_right = 6
+patch_margin_bottom = 6
+axis_stretch_horizontal = 1
+axis_stretch_vertical = 2
+
+[node name="Markers" type="HBoxContainer" parent="MarkerContainer"]
+unique_name_in_owner = true
+z_index = 1
+layout_mode = 1
+offset_left = 5.0
+offset_top = 4.0
+offset_right = 117.0
+offset_bottom = 17.0
+theme_override_constants/separation = 0

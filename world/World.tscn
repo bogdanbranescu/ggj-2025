@@ -1,4 +1,4 @@
-[gd_scene load_steps=48 format=4 uid="uid://cwrk5qs1xw8ww"]
+[gd_scene load_steps=51 format=4 uid="uid://cwrk5qs1xw8ww"]
 
 [ext_resource type="Script" path="res://world/World.gd" id="1_emwio"]
 [ext_resource type="AudioStream" uid="uid://b07sdki0ejnj8" path="res://audio/GGJ2025_PeaceMode.ogg" id="2_c1atx"]
@@ -27,12 +27,15 @@
 [ext_resource type="Texture2D" uid="uid://b0irkaufy1qgj" path="res://ui/health-bar.png" id="18_gt3ls"]
 [ext_resource type="AudioStream" uid="uid://dp4klrahwhgwe" path="res://audio/Bubble placement.ogg" id="18_vfg23"]
 [ext_resource type="PackedScene" uid="uid://cilb028n2qvvx" path="res://entities/shell/Shell.tscn" id="21_a6tww"]
+[ext_resource type="PackedScene" uid="uid://wj37gycavr2" path="res://ui/ui_elements/timeline/Timeline.tscn" id="22_lm5xi"]
 [ext_resource type="PackedScene" uid="uid://d2mof7nlwni8h" path="res://entities/shooter/Shooter.tscn" id="23_heydi"]
 [ext_resource type="Texture2D" uid="uid://bqkxmvfkumepg" path="res://ui/menu-frame-filled-9patch.png" id="23_hqcij"]
 [ext_resource type="PackedScene" uid="uid://ds6qdynkb6bou" path="res://entities/collector/Collector.tscn" id="24_1eyrg"]
 [ext_resource type="PackedScene" uid="uid://coyffxkcgwjc5" path="res://entities/bullet/Bullet.tscn" id="25_jlqvu"]
 [ext_resource type="Texture2D" uid="uid://v8tgcgqx1x7s" path="res://ui/selection-frame-9patch.png" id="26_y5eru"]
 [ext_resource type="Script" path="res://ui/EndScreen.gd" id="27_el0x5"]
+[ext_resource type="FontFile" uid="uid://cojonw7sgwf3k" path="res://ui/fonts/depixel/DePixelBreit.ttf" id="29_x124v"]
+[ext_resource type="Script" path="res://ui/StartScreen.gd" id="30_oyor2"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_fny0p"]
 texture = ExtResource("6_3yexk")
@@ -284,14 +287,17 @@ atlas = ExtResource("12_ykosg")
 region = Rect2(0, 0, 14, 14)
 
 [node name="World" type="Node2D"]
+process_mode = 1
 script = ExtResource("1_emwio")
 
 [node name="BGMPeaceful" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource("2_c1atx")
+volume_db = -30.0
 parameters/looping = true
 
 [node name="BGMAttack" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource("3_6u1kq")
+volume_db = -30.0
 parameters/looping = true
 
 [node name="OctopusAI" type="Node" parent="."]
@@ -385,7 +391,7 @@ frame = 1
 layout_mode = 2
 
 [node name="MarginContainer" type="MarginContainer" parent="UI/OctopusUI/OctopusHP"]
-custom_minimum_size = Vector2(0, 10)
+custom_minimum_size = Vector2(0, 6)
 layout_mode = 2
 
 [node name="OctopusHealthBar" type="TextureProgressBar" parent="UI/OctopusUI/OctopusHP"]
@@ -405,43 +411,41 @@ texture_progress = SubResource("AtlasTexture_prrnb")
 custom_minimum_size = Vector2(10, 10)
 layout_mode = 2
 
-[node name="AttackInfoContainer" type="VBoxContainer" parent="UI/OctopusUI"]
-custom_minimum_size = Vector2(120, 0)
+[node name="UpcomingText" type="VBoxContainer" parent="UI/OctopusUI"]
 layout_mode = 2
 
-[node name="MarginContainer" type="MarginContainer" parent="UI/OctopusUI/AttackInfoContainer"]
+[node name="MarginContainer" type="MarginContainer" parent="UI/OctopusUI/UpcomingText"]
+custom_minimum_size = Vector2(0, 8)
+layout_mode = 2
+
+[node name="Text" type="Label" parent="UI/OctopusUI/UpcomingText"]
+layout_mode = 2
+text = "Next"
+
+[node name="MarginContainer2" type="MarginContainer" parent="UI/OctopusUI"]
 custom_minimum_size = Vector2(0, 10)
 layout_mode = 2
 
-[node name="AttackInfo" type="HBoxContainer" parent="UI/OctopusUI/AttackInfoContainer"]
-custom_minimum_size = Vector2(100, 0)
+[node name="TimelineContainer" type="VBoxContainer" parent="UI/OctopusUI"]
+custom_minimum_size = Vector2(120, 0)
 layout_mode = 2
-size_flags_horizontal = 3
 
-[node name="AttackingIn" type="RichTextLabel" parent="UI/OctopusUI/AttackInfoContainer/AttackInfo"]
-custom_minimum_size = Vector2(140, 0)
+[node name="MarginContainer" type="MarginContainer" parent="UI/OctopusUI/TimelineContainer"]
+custom_minimum_size = Vector2(0, 4)
 layout_mode = 2
-size_flags_horizontal = 3
-text = "Octopus attacks in"
-fit_content = true
 
-[node name="AttackingInNumber" type="RichTextLabel" parent="UI/OctopusUI/AttackInfoContainer/AttackInfo"]
-unique_name_in_owner = true
-custom_minimum_size = Vector2(20, 20)
+[node name="Timeline" parent="UI/OctopusUI/TimelineContainer" instance=ExtResource("22_lm5xi")]
 layout_mode = 2
-size_flags_horizontal = 8
-text = "10"
-fit_content = true
 
 [node name="UIContainer" type="HBoxContainer" parent="UI"]
 anchors_preset = 11
 anchor_left = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = 12.0
-offset_top = 12.0
-offset_right = -12.0
-offset_bottom = -12.0
+offset_left = -132.0
+offset_top = 10.0
+offset_right = -10.0
+offset_bottom = -10.0
 grow_horizontal = 0
 grow_vertical = 2
 theme = SubResource("Theme_0rton")
@@ -522,7 +526,7 @@ layout_mode = 1
 anchors_preset = -1
 anchor_right = 1.0
 offset_left = 10.0
-offset_top = 16.0
+offset_top = 12.0
 offset_right = -10.0
 offset_bottom = 76.0
 grow_horizontal = 2
@@ -565,7 +569,7 @@ stretch_mode = 2
 [node name="Name" type="Label" parent="UI/UIContainer/SidePanel/ShopFrame/Shop/ItemHealth"]
 layout_mode = 2
 size_flags_horizontal = 3
-text = "Health"
+text = "Heal"
 
 [node name="Price" type="Label" parent="UI/UIContainer/SidePanel/ShopFrame/Shop/ItemHealth"]
 layout_mode = 2
@@ -619,7 +623,35 @@ size_flags_vertical = 8
 text = "50"
 horizontal_alignment = 2
 
+[node name="DescriptionFrame" type="NinePatchRect" parent="UI/UIContainer/SidePanel"]
+custom_minimum_size = Vector2(132, 86)
+layout_mode = 2
+texture = ExtResource("8_ydyjg")
+draw_center = false
+patch_margin_left = 12
+patch_margin_top = 12
+patch_margin_right = 12
+patch_margin_bottom = 12
+axis_stretch_horizontal = 1
+axis_stretch_vertical = 1
+
+[node name="ItemDescription" type="RichTextLabel" parent="UI/UIContainer/SidePanel/DescriptionFrame"]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 10.0
+offset_top = 11.0
+offset_right = -10.0
+offset_bottom = -11.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "Collects incoming bubbles
+(value x 2)"
+
 [node name="HP" type="HBoxContainer" parent="UI/UIContainer/SidePanel"]
+custom_minimum_size = Vector2(0, 18)
 layout_mode = 2
 
 [node name="Icon" type="TextureRect" parent="UI/UIContainer/SidePanel/HP"]
@@ -636,9 +668,82 @@ size_flags_horizontal = 3
 value = 10.0
 nine_patch_stretch = true
 stretch_margin_left = 10
+stretch_margin_top = 6
 stretch_margin_right = 10
+stretch_margin_bottom = 6
 texture_under = SubResource("AtlasTexture_ikdtq")
 texture_progress = SubResource("AtlasTexture_prrnb")
+
+[node name="Text" type="Label" parent="UI/UIContainer/SidePanel/HP/HealthBar"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -17.0
+offset_top = -5.5
+offset_right = 17.0
+offset_bottom = 5.5
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_fonts/font = ExtResource("29_x124v")
+theme_override_font_sizes/font_size = 9
+text = "1/100"
+
+[node name="StartScreen" type="Control" parent="UI"]
+process_mode = 2
+z_index = 2
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = SubResource("Theme_0rton")
+script = ExtResource("30_oyor2")
+
+[node name="NinePatchRect" type="NinePatchRect" parent="UI/StartScreen"]
+custom_minimum_size = Vector2(280, 160)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -14.0
+offset_top = -14.0
+offset_right = 14.0
+offset_bottom = 14.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("23_hqcij")
+patch_margin_left = 14
+patch_margin_top = 14
+patch_margin_right = 14
+patch_margin_bottom = 14
+axis_stretch_horizontal = 1
+axis_stretch_vertical = 1
+
+[node name="VBoxContainer" type="CenterContainer" parent="UI/StartScreen/NinePatchRect"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="LoseText" type="Label" parent="UI/StartScreen/NinePatchRect/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+text = "~~~ Bubbled Out ~~~
+
+Arrow Keys - move
+Z - buy and place objects
+X - enter/exit shop
+
+Press Z to start"
+horizontal_alignment = 1
 
 [node name="LoseScreen" type="Control" parent="UI"]
 visible = false
@@ -746,12 +851,22 @@ horizontal_alignment = 1
 
 [node name="StateChart" type="Node" parent="."]
 unique_name_in_owner = true
+process_mode = 3
 script = ExtResource("12_8mk8q")
 track_in_editor = true
 
 [node name="Mode" type="Node" parent="StateChart"]
 script = ExtResource("13_yy8p7")
-initial_state = NodePath("Swim")
+initial_state = NodePath("StartScreen")
+
+[node name="StartScreen" type="Node" parent="StateChart/Mode"]
+script = ExtResource("14_nlpmn")
+
+[node name="toSwim" type="Node" parent="StateChart/Mode/StartScreen"]
+script = ExtResource("15_g86g8")
+to = NodePath("../../Swim")
+event = &"go_to_swim"
+delay_in_seconds = "0.0"
 
 [node name="Swim" type="Node" parent="StateChart/Mode"]
 script = ExtResource("14_nlpmn")

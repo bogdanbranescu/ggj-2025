@@ -19,13 +19,15 @@ func _ready() -> void:
 
 	EventBus.bubbles_changed.connect(adjust_color)
 
-	price = Global.item_schedules[type].price + level * Global.item_schedules[type].increment
+	price = Global.item_data[type].price + level * Global.item_data[type].increment
 	$Price.text = str(price)
 	adjust_color(0)
 
 
 func select() -> void:
 	%ShopItemSelectorUI.global_position.y = global_position.y - 4
+	%ItemDescription.text = Global.item_data[type].description
+
 	if is_affordable:
 		%ShopItemSelectorUI.region_rect.position.x = 0
 	else:

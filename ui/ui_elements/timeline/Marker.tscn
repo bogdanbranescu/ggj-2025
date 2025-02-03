@@ -1,0 +1,72 @@
+[gd_scene load_steps=7 format=3 uid="uid://c3xfqt0dbmpiu"]
+
+[ext_resource type="Texture2D" uid="uid://x5celg00612k" path="res://ui/ui_elements/timeline/idle-marker.png" id="1_ooc4n"]
+[ext_resource type="Script" path="res://ui/ui_elements/timeline/Marker.gd" id="1_wmjpe"]
+[ext_resource type="Texture2D" uid="uid://bjqnof241wg7s" path="res://ui/ui_elements/timeline/attack-marker.png" id="2_pxevx"]
+[ext_resource type="Texture2D" uid="uid://dhx75uw0o8p8k" path="res://ui/ui_elements/timeline/attack-icon.png" id="3_2xoqy"]
+[ext_resource type="Texture2D" uid="uid://dmh4wj5076vao" path="res://ui/ui_elements/timeline/heal-marker.png" id="5_nnhta"]
+[ext_resource type="Texture2D" uid="uid://q4mykg8oihkc" path="res://ui/ui_elements/timeline/heal-icon.png" id="5_tdsjq"]
+
+[node name="Marker" type="Control"]
+custom_minimum_size = Vector2(2, 13)
+layout_mode = 3
+anchors_preset = 0
+offset_right = 1.0
+offset_bottom = 13.0
+script = ExtResource("1_wmjpe")
+
+[node name="Idle" type="TextureRect" parent="."]
+layout_mode = 2
+offset_left = -1.0
+offset_right = 2.0
+offset_bottom = 13.0
+texture = ExtResource("1_ooc4n")
+stretch_mode = 2
+
+[node name="AttackPlayer" type="TextureRect" parent="."]
+visible = false
+layout_mode = 0
+offset_left = -1.0
+offset_right = 2.0
+offset_bottom = 13.0
+texture = ExtResource("2_pxevx")
+stretch_mode = 2
+
+[node name="Icon" type="Sprite2D" parent="AttackPlayer"]
+z_index = 1
+position = Vector2(-7, 13)
+texture = ExtResource("3_2xoqy")
+centered = false
+hframes = 5
+
+[node name="AttackObjectUNIMPLEMENTED" type="TextureRect" parent="."]
+visible = false
+layout_mode = 0
+offset_left = -1.0
+offset_right = 2.0
+offset_bottom = 13.0
+texture = ExtResource("2_pxevx")
+stretch_mode = 2
+
+[node name="Icon" type="Sprite2D" parent="AttackObjectUNIMPLEMENTED"]
+z_index = 1
+position = Vector2(-7, 13)
+texture = ExtResource("3_2xoqy")
+centered = false
+hframes = 5
+
+[node name="Heal" type="TextureRect" parent="."]
+visible = false
+layout_mode = 0
+offset_left = -1.0
+offset_right = 2.0
+offset_bottom = 13.0
+texture = ExtResource("5_nnhta")
+stretch_mode = 2
+
+[node name="Icon" type="Sprite2D" parent="Heal"]
+z_index = 1
+position = Vector2(-7, 13)
+texture = ExtResource("5_tdsjq")
+centered = false
+hframes = 5
