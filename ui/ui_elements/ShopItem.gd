@@ -61,17 +61,17 @@ func handle_buy():
 
 		Global.ITEM_TYPE.SHOVEL:
 			print("SHOVEL")
-			%Cursor.set_type(Global.ITEM_TYPE.SHOVEL)
+			%Cursor.set_type(Global.ITEM_TYPE.SHOVEL, price)
 			%StateChart.send_event("go_to_placement")
 
 		Global.ITEM_TYPE.COLLECTOR:
 			print("COLLECTOR")
-			%Cursor.set_type(Global.ITEM_TYPE.COLLECTOR)
+			%Cursor.set_type(Global.ITEM_TYPE.COLLECTOR, price)
 			%StateChart.send_event("go_to_placement")
 
 		Global.ITEM_TYPE.SHOOTER:
 			print("SHOOTER")
-			%Cursor.set_type(Global.ITEM_TYPE.SHOOTER)
+			%Cursor.set_type(Global.ITEM_TYPE.SHOOTER, price)
 			%StateChart.send_event("go_to_placement")
 
 		_:

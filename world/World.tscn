@@ -937,6 +937,12 @@ to = NodePath("../../WinGame")
 event = &"go_to_win_screen"
 delay_in_seconds = "0.0"
 
+[node name="toShop" type="Node" parent="StateChart/Mode/Placement"]
+script = ExtResource("15_g86g8")
+to = NodePath("../../Shop")
+event = &"go_to_shop"
+delay_in_seconds = "0.0"
+
 [node name="LoseGame" type="Node" parent="StateChart/Mode"]
 script = ExtResource("14_nlpmn")
 

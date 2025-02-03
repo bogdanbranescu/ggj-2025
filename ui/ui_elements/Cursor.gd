@@ -9,13 +9,12 @@ extends Area2D
 }
 
 var type: int
+var cost_of_type:int;
 
 @onready var world = get_node(Global.world_path)
 
 func _ready() -> void:
-	set_process(false)
-	set_process_input(false)
-	hide()
+	toggle_behavior(false)
 
 
 func _input(_event: InputEvent) -> void:
@@ -53,24 +52,31 @@ func _input(_event: InputEvent) -> void:
 				$SFX.play()
 	
 	if Input.is_action_just_pressed("cancel"):
-		print("CURSOR CANCEL")
+		toggle_behavior(false)
+		world.current_bubbles += cost_of_type
 		%StateChart.send_event("go_to_shop")
 
 
 func _on_placement_state_entered() -> void:
-	set_process(true)
-	set_process_input(true)
-	show()
+	toggle_behavior(true)
 
 
 func _on_placement_state_exited() -> void:
-	set_process(false)
-	set_process_input(false)
-	hide()
+	toggle_behavior(false)
 
 
-func set_type(cursor_type: int) -> void:
+func toggle_behavior(value: bool) -> void:
+		set_process(value)
+		set_process_input(value)
+
+		if value:
+			show()
+		else:
+			hide()
+
+func set_type(cursor_type: int, price: int) -> void:
 	type = cursor_type
+	cost_of_type = price
 	$Sprite.frame = type
 
 
