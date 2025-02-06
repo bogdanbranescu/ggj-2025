@@ -55,9 +55,11 @@ func place_tile(location: Vector2i, type: int):
 			set_cell(location, 0, Vector2i(0, 0), 6)
 			
 		Global.TILE_TYPE.COLLECTOR:
+			print("COLLECTOR")
 			set_cell(location, 0, Vector2i(0, 0), 4)
 		
 		Global.TILE_TYPE.SHOOTER:
+			print("SHOOTER")
 			set_cell(location, 0, Vector2i(0, 0), 5)
 
 		Global.TILE_TYPE.SHELL:

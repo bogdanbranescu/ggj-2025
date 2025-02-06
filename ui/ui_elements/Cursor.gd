@@ -112,6 +112,7 @@ func place_item():
 	if not is_current_item_placeable(map_position):
 		return
 	
+	print("TYPE ", type)
 	tilemap.place_tile(map_position, type)
 	$SFX.play()
 	EventBus.price_increased.emit(type)

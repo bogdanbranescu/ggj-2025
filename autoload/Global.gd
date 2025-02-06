@@ -20,8 +20,8 @@ enum ITEM_TYPE {
 enum TILE_TYPE {
 	BUBBLE,
 	URCHIN,
-	SHOOTER,
 	COLLECTOR,
+	SHOOTER,
 	SAND,
 	SHELL,
 	BULLET,
@@ -41,18 +41,18 @@ var item_data = {
 		description = "Remove one sand patch",
 	},
 	ITEM_TYPE.HEALTH: {
-		price = 25,
+		price = 20,
 		increment = 10,
 		description = "Restore " + str(Global.HEAL_AMOUNT) + " HP",
 	},
 	ITEM_TYPE.COLLECTOR:
-		{price = 30,
+		{price = 40,
 		increment = 20,
 		description = "Collects incoming bubbles\n(value x 2)",
 	},
 	ITEM_TYPE.SHOOTER: {
-		price = 40,
-		increment = 20,
+		price = 50,
+		increment = 25,
 		description = "Turns incoming bubbles into bullets",
 	},
 }

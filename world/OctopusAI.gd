@@ -70,25 +70,21 @@ func run_strategy(strategy: Callable):
 
 
 func strategy_incremental_deterministic_a():
-	var intensity = 1 + floor(run_strategy_count / 4.0) # increases every 2 cycles (as described below)
-	var clamped_intensity = clamp(intensity, 1, 15)
+	var intensity = 1 + floor(run_strategy_count / 6.0) # increases every 2 cycles (as described below)
+	var clamped_intensity = clamp(intensity, 1, 10)
 
-	match run_strategy_count % 4:
+	match run_strategy_count % 3:
 		0:
-			var time_before_action = (25 - clamped_intensity) * 2
+			var time_before_action = (16 - clamped_intensity) * 2
 			var action_data = {amount = clamped_intensity * 2}
 			choose_action(Global.OCTOPUS_ACTION.ATTACK_PLAYER, time_before_action, action_data)
 		1:
-			var time_before_action = (25 - clamped_intensity) * 2
+			var time_before_action = (16 - clamped_intensity) * 2
 			var action_data = {amount = clamped_intensity * 2}
 			choose_action(Global.OCTOPUS_ACTION.ATTACK_PLAYER, time_before_action, action_data)
 		2:
-			var time_before_action = (25 - clamped_intensity) * 2
-			var action_data = {amount = clamped_intensity * 2}
-			choose_action(Global.OCTOPUS_ACTION.ATTACK_PLAYER, time_before_action, action_data)
-		3:
-			var time_before_action = (25 - clamped_intensity) * 2
-			var action_data = {amount = clamped_intensity / 2 * 10}
+			var time_before_action = (16 - clamped_intensity) * 2
+			var action_data = {amount = clamped_intensity * 5}
 			choose_action(Global.OCTOPUS_ACTION.HEAL, time_before_action, action_data)
 
 
