@@ -331,7 +331,7 @@ position = Vector2(100, 80)
 
 [node name="Cursor" type="Area2D" parent="."]
 unique_name_in_owner = true
-position = Vector2(60, 60)
+position = Vector2(160, 60)
 collision_layer = 2
 collision_mask = 2
 script = ExtResource("9_uq3ip")
@@ -340,6 +340,7 @@ script = ExtResource("9_uq3ip")
 texture = ExtResource("10_lktij")
 centered = false
 hframes = 4
+vframes = 2
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Cursor"]
 position = Vector2(10, 10)
