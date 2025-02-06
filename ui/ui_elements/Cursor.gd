@@ -98,6 +98,7 @@ func dig():
 
 	tilemap.remove_tile(map_position)
 	$SFX.play()
+	EventBus.price_increased.emit(type)
 	%StateChart.send_event("end_placement")
 
 	if world.checkIfCanSpawnClam():
@@ -113,6 +114,7 @@ func place_item():
 	
 	tilemap.place_tile(map_position, type)
 	$SFX.play()
+	EventBus.price_increased.emit(type)
 	%StateChart.send_event("end_placement")
 	
 

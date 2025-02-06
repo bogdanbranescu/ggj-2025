@@ -17,27 +17,27 @@ func _ready() -> void:
 
 func populate_timeline():
 	for i in range(%Markers.size.x / 2):
-		if i < starting_marker_offset:		# due to indicator sprite's offset in the gauge
-			add_marker(Global.OCTOPUS_ACTION.IDLE)
+		if i < starting_marker_offset: # due to indicator sprite's offset in the gauge
+			add_marker({type = Global.OCTOPUS_ACTION.IDLE, data = {}})
 		else:
 			add_marker(%Timekeeper.upcoming_actions[i - starting_marker_offset])
 
 
-func add_marker(type: int):
+func add_marker(marker_data: Dictionary):
 	var new_marker = marker_scene.instantiate()
-	new_marker.set_type(type)
+	new_marker.set_data(marker_data)
 	marker_container.add_child(new_marker)
 
 
-func cycle_marker(marker: Node, type: int):
-	marker.set_type(type)
+func cycle_marker(marker: Node, marker_data: Dictionary):
+	marker.set_data(marker_data)
 	marker.get_parent().move_child(marker, -1)
 
 
 func tick_update() -> void:
 	var all_markers = marker_container.get_children()
-	var type_after_cycle = %Timekeeper.upcoming_actions[%Markers.size.x / 2 - starting_marker_offset]
-	cycle_marker(all_markers[0], type_after_cycle)
+	var data_after_cycle = %Timekeeper.upcoming_actions[%Markers.size.x / 2 - starting_marker_offset]
+	cycle_marker(all_markers[0], data_after_cycle)
 
 	var marker_count = all_markers.size()
 

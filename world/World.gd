@@ -16,6 +16,8 @@ var is_shaking := false
 var baseline_bgm_volume := 0
 var mute_bgm_volume := -80
 
+var unlucky_streak := 0
+
 
 func _ready() -> void:
 	EventBus.octopus_attacked.connect(start_shaking_screen)
@@ -33,8 +35,7 @@ func _ready() -> void:
 
 	current_bubbles = 0
 
-	%OctopusAI.set_strategy("basic")
-
+	$UI/StartScreen.show()
 	get_tree().paused = true
 
 
@@ -47,6 +48,7 @@ func _process(_delta: float) -> void:
 func heal(amount: int) -> void:
 	current_hp = clamp(current_hp + amount, 0, 100)
 	update_health_bar()
+	%PlayerHealingAnimation.play()
 
 
 func update_health_bar() -> void:
@@ -83,12 +85,17 @@ func checkIfCanSpawnClam() -> bool:
 	rng.randomize()
 
 	if !rng.randi() % 3 == 0:
-		can_spawn = false
+		if unlucky_streak >= 3:
+			can_spawn = true
+			unlucky_streak = 0
+		else:
+			can_spawn = false
+			unlucky_streak += 1
 
 	return can_spawn;
 
 
-func start_shaking_screen():
+func start_shaking_screen(_data = {}):
 	is_shaking = true
 	get_tree().create_tween().tween_callback(
 		func():

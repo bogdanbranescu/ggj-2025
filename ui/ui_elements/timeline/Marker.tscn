@@ -1,11 +1,13 @@
-[gd_scene load_steps=7 format=3 uid="uid://c3xfqt0dbmpiu"]
+[gd_scene load_steps=9 format=3 uid="uid://c3xfqt0dbmpiu"]
 
 [ext_resource type="Texture2D" uid="uid://x5celg00612k" path="res://ui/ui_elements/timeline/idle-marker.png" id="1_ooc4n"]
 [ext_resource type="Script" path="res://ui/ui_elements/timeline/Marker.gd" id="1_wmjpe"]
 [ext_resource type="Texture2D" uid="uid://bjqnof241wg7s" path="res://ui/ui_elements/timeline/attack-marker.png" id="2_pxevx"]
 [ext_resource type="Texture2D" uid="uid://dhx75uw0o8p8k" path="res://ui/ui_elements/timeline/attack-icon.png" id="3_2xoqy"]
 [ext_resource type="Texture2D" uid="uid://dmh4wj5076vao" path="res://ui/ui_elements/timeline/heal-marker.png" id="5_nnhta"]
+[ext_resource type="Theme" uid="uid://3yq0cnm2bqhq" path="res://ui/theme/Theme.tres" id="5_q7fot"]
 [ext_resource type="Texture2D" uid="uid://q4mykg8oihkc" path="res://ui/ui_elements/timeline/heal-icon.png" id="5_tdsjq"]
+[ext_resource type="FontFile" uid="uid://cojonw7sgwf3k" path="res://ui/fonts/depixel/DePixelBreit.ttf" id="6_re25c"]
 
 [node name="Marker" type="Control"]
 custom_minimum_size = Vector2(2, 13)
@@ -39,6 +41,20 @@ texture = ExtResource("3_2xoqy")
 centered = false
 hframes = 5
 
+[node name="Amount" type="Label" parent="AttackPlayer"]
+texture_filter = 1
+layout_mode = 0
+offset_left = -10.0
+offset_top = 29.0
+offset_right = 15.0
+offset_bottom = 42.0
+theme = ExtResource("5_q7fot")
+theme_override_colors/font_color = Color(0.376471, 0.231373, 0.227451, 1)
+theme_override_fonts/font = ExtResource("6_re25c")
+theme_override_font_sizes/font_size = 9
+text = "10"
+horizontal_alignment = 1
+
 [node name="AttackObjectUNIMPLEMENTED" type="TextureRect" parent="."]
 visible = false
 layout_mode = 0
@@ -55,6 +71,19 @@ texture = ExtResource("3_2xoqy")
 centered = false
 hframes = 5
 
+[node name="Amount" type="Label" parent="AttackObjectUNIMPLEMENTED"]
+texture_filter = 1
+offset_left = -10.0
+offset_top = 29.0
+offset_right = 15.0
+offset_bottom = 42.0
+theme = ExtResource("5_q7fot")
+theme_override_colors/font_color = Color(0.376471, 0.231373, 0.227451, 1)
+theme_override_fonts/font = ExtResource("6_re25c")
+theme_override_font_sizes/font_size = 9
+text = "100"
+horizontal_alignment = 1
+
 [node name="Heal" type="TextureRect" parent="."]
 visible = false
 layout_mode = 0
@@ -70,3 +99,16 @@ position = Vector2(-7, 13)
 texture = ExtResource("5_tdsjq")
 centered = false
 hframes = 5
+
+[node name="Amount" type="Label" parent="Heal"]
+texture_filter = 1
+offset_left = -10.0
+offset_top = 29.0
+offset_right = 15.0
+offset_bottom = 42.0
+theme = ExtResource("5_q7fot")
+theme_override_colors/font_color = Color(0.227451, 0.376471, 0.290196, 1)
+theme_override_fonts/font = ExtResource("6_re25c")
+theme_override_font_sizes/font_size = 9
+text = "10"
+horizontal_alignment = 1

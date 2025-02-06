@@ -31,7 +31,7 @@ func _on_ticker_timeout() -> void:
 
 	upcoming_actions.pop_front()
 
-	if upcoming_actions.size()< pregen_horizon:
+	if upcoming_actions.size() < pregen_horizon:
 		unpack_schedule()
 		
 
@@ -43,24 +43,25 @@ func unpack_schedule():
 
 func extract_actions_from_schedule(action_schedule: Dictionary) -> Array:
 	var action_type = action_schedule.type
+	var action_data = action_schedule.data
 
 	var new_actions = []
 	for i in range(action_schedule.duration):
-		new_actions.append(action_type)
+		new_actions.append({type = action_type, data = action_data})
 	
 	return new_actions
 
 
 func handle_octopus_action():
-	match upcoming_actions[0]:
+	match upcoming_actions[0].type:
 		Global.OCTOPUS_ACTION.ATTACK_PLAYER:
-			EventBus.octopus_attacked.emit()
+			EventBus.octopus_attacked.emit(upcoming_actions[0])
 		Global.OCTOPUS_ACTION.HEAL:
-			EventBus.octopus_healed.emit()
+			EventBus.octopus_healed.emit(upcoming_actions[0])
 		_:
 			pass
 			
 
 func handle_attack_music():
-	if upcoming_actions[Global.MUSIC_ANTICIPATION_WINDOW] == Global.OCTOPUS_ACTION.ATTACK_PLAYER:
+	if upcoming_actions[Global.MUSIC_ANTICIPATION_WINDOW].type == Global.OCTOPUS_ACTION.ATTACK_PLAYER:
 		EventBus.crossfade_music.emit()

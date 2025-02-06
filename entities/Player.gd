@@ -53,6 +53,6 @@ func _on_area_2d_area_entered(area: Area2D) -> void:
 		area.interact_on_collision(self)
 
 
-func handleOnTakeDamage():
+func handleOnTakeDamage(action):
 	print("Player took damage!")
-	world.playerTakeDamage(Global.DAMAGE_PER_OCTOPUS_HIT)
+	world.playerTakeDamage(action.data.amount)

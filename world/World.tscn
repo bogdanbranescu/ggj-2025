@@ -1,4 +1,4 @@
-[gd_scene load_steps=51 format=4 uid="uid://cwrk5qs1xw8ww"]
+[gd_scene load_steps=61 format=4 uid="uid://cwrk5qs1xw8ww"]
 
 [ext_resource type="Script" path="res://world/World.gd" id="1_emwio"]
 [ext_resource type="AudioStream" uid="uid://b07sdki0ejnj8" path="res://audio/GGJ2025_PeaceMode.ogg" id="2_c1atx"]
@@ -10,7 +10,6 @@
 [ext_resource type="PackedScene" uid="uid://brnkvvapmt4rg" path="res://entities/player/Player.tscn" id="5_lgqo4"]
 [ext_resource type="Script" path="res://world/TileMap.gd" id="5_mp1j5"]
 [ext_resource type="Texture2D" uid="uid://bnwktrh3amfk8" path="res://world/tileset-underwater.png" id="6_3yexk"]
-[ext_resource type="FontFile" uid="uid://dioqn01g7p3c4" path="res://ui/fonts/Pixellari.ttf" id="8_fwsdr"]
 [ext_resource type="PackedScene" uid="uid://davusn2vtvfv8" path="res://entities/sea_urchin/SeaUrchin.tscn" id="8_re5va"]
 [ext_resource type="Texture2D" uid="uid://dv3ffh2llfo0t" path="res://ui/menu-frame-9patch.png" id="8_ydyjg"]
 [ext_resource type="Texture2D" uid="uid://gtmcxcpn07l1" path="res://ui/glyph-tab.png" id="9_knilg"]
@@ -26,7 +25,9 @@
 [ext_resource type="Texture2D" uid="uid://c0s1prf00u2i8" path="res://ui/octopus.png" id="16_veoqc"]
 [ext_resource type="Texture2D" uid="uid://b0irkaufy1qgj" path="res://ui/health-bar.png" id="18_gt3ls"]
 [ext_resource type="AudioStream" uid="uid://dp4klrahwhgwe" path="res://audio/Bubble placement.ogg" id="18_vfg23"]
+[ext_resource type="Theme" uid="uid://3yq0cnm2bqhq" path="res://ui/theme/Theme.tres" id="19_x7rgh"]
 [ext_resource type="PackedScene" uid="uid://cilb028n2qvvx" path="res://entities/shell/Shell.tscn" id="21_a6tww"]
+[ext_resource type="Texture2D" uid="uid://ba5exvv0gpt2l" path="res://sfx/effect-healing.png" id="21_xtvrt"]
 [ext_resource type="PackedScene" uid="uid://wj37gycavr2" path="res://ui/ui_elements/timeline/Timeline.tscn" id="22_lm5xi"]
 [ext_resource type="PackedScene" uid="uid://d2mof7nlwni8h" path="res://entities/shooter/Shooter.tscn" id="23_heydi"]
 [ext_resource type="Texture2D" uid="uid://bqkxmvfkumepg" path="res://ui/menu-frame-filled-9patch.png" id="23_hqcij"]
@@ -247,16 +248,82 @@ custom_data_layer_1/type = 1
 sources/0 = SubResource("TileSetScenesCollectionSource_jfc4p")
 sources/1 = SubResource("TileSetAtlasSource_yj5pe")
 
+[sub_resource type="AtlasTexture" id="AtlasTexture_p85cf"]
+atlas = ExtResource("21_xtvrt")
+region = Rect2(160, 0, 20, 20)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_4diqo"]
+atlas = ExtResource("21_xtvrt")
+region = Rect2(0, 0, 20, 20)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_qp0q8"]
+atlas = ExtResource("21_xtvrt")
+region = Rect2(20, 0, 20, 20)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_0dids"]
+atlas = ExtResource("21_xtvrt")
+region = Rect2(40, 0, 20, 20)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_iskgt"]
+atlas = ExtResource("21_xtvrt")
+region = Rect2(60, 0, 20, 20)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_nk5np"]
+atlas = ExtResource("21_xtvrt")
+region = Rect2(80, 0, 20, 20)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_duwv2"]
+atlas = ExtResource("21_xtvrt")
+region = Rect2(100, 0, 20, 20)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_gws1q"]
+atlas = ExtResource("21_xtvrt")
+region = Rect2(120, 0, 20, 20)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_17cpa"]
+atlas = ExtResource("21_xtvrt")
+region = Rect2(140, 0, 20, 20)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_86hyy"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_p85cf")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_4diqo")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_qp0q8")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_0dids")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_iskgt")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_nk5np")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_duwv2")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_gws1q")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_17cpa")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_p85cf")
+}],
+"loop": false,
+"name": &"default",
+"speed": 10.0
+}]
+
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_rg2nt"]
 size = Vector2(18, 18)
-
-[sub_resource type="Theme" id="Theme_0rton"]
-Label/colors/font_color = Color(0.752941, 0.819608, 0.8, 1)
-Label/font_sizes/font_size = 16
-Label/fonts/font = ExtResource("8_fwsdr")
-RichTextLabel/colors/default_color = Color(0.752941, 0.819608, 0.8, 1)
-RichTextLabel/font_sizes/normal_font_size = 16
-RichTextLabel/fonts/normal_font = ExtResource("8_fwsdr")
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_ikdtq"]
 atlas = ExtResource("18_gt3ls")
@@ -329,6 +396,12 @@ script = ExtResource("5_mp1j5")
 [node name="Player" parent="." instance=ExtResource("5_lgqo4")]
 position = Vector2(100, 80)
 
+[node name="PlayerHealingAnimation" type="AnimatedSprite2D" parent="Player"]
+unique_name_in_owner = true
+z_index = 5
+position = Vector2(27, -1)
+sprite_frames = SubResource("SpriteFrames_86hyy")
+
 [node name="Cursor" type="Area2D" parent="."]
 unique_name_in_owner = true
 position = Vector2(160, 60)
@@ -372,7 +445,7 @@ stream = ExtResource("18_vfg23")
 [node name="OctopusUI" type="HBoxContainer" parent="UI"]
 offset_right = 40.0
 offset_bottom = 40.0
-theme = SubResource("Theme_0rton")
+theme = ExtResource("19_x7rgh")
 
 [node name="Container" type="Control" parent="UI/OctopusUI"]
 custom_minimum_size = Vector2(40, 90)
@@ -405,6 +478,11 @@ stretch_margin_left = 10
 stretch_margin_right = 10
 texture_under = SubResource("AtlasTexture_ikdtq")
 texture_progress = SubResource("AtlasTexture_prrnb")
+
+[node name="OctopusHealingAnimation" type="AnimatedSprite2D" parent="UI/OctopusUI/OctopusHP/OctopusHealthBar"]
+unique_name_in_owner = true
+position = Vector2(88, 9)
+sprite_frames = SubResource("SpriteFrames_86hyy")
 
 [node name="MarginContainer" type="MarginContainer" parent="UI/OctopusUI"]
 custom_minimum_size = Vector2(10, 10)
@@ -447,7 +525,7 @@ offset_right = -10.0
 offset_bottom = -10.0
 grow_horizontal = 0
 grow_vertical = 2
-theme = SubResource("Theme_0rton")
+theme = ExtResource("19_x7rgh")
 
 [node name="SidePanel" type="VBoxContainer" parent="UI/UIContainer"]
 layout_mode = 2
@@ -699,7 +777,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-theme = SubResource("Theme_0rton")
+theme = ExtResource("19_x7rgh")
 script = ExtResource("30_oyor2")
 
 [node name="NinePatchRect" type="NinePatchRect" parent="UI/StartScreen"]
@@ -753,7 +831,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-theme = SubResource("Theme_0rton")
+theme = ExtResource("19_x7rgh")
 script = ExtResource("27_el0x5")
 
 [node name="NinePatchRect" type="NinePatchRect" parent="UI/LoseScreen"]
@@ -803,7 +881,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-theme = SubResource("Theme_0rton")
+theme = ExtResource("19_x7rgh")
 script = ExtResource("27_el0x5")
 
 [node name="NinePatchRect" type="NinePatchRect" parent="UI/WinScreen"]

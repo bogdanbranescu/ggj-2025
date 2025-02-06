@@ -1,7 +1,7 @@
 extends HBoxContainer
 
 
-@export_enum("SHOVEL", "HEALTH", "COLLECTOR", "SHOOTER") var type : int
+@export_enum("SHOVEL", "HEALTH", "COLLECTOR", "SHOOTER") var type: int
 
 @onready var world = get_node(Global.world_path)
 @onready var price_label = $Price as Label
@@ -18,10 +18,24 @@ func _ready() -> void:
 	focus_exited.connect(deselect)
 
 	EventBus.bubbles_changed.connect(adjust_color)
+	EventBus.price_increased.connect(increase_price)
 
+	update_price()
+	adjust_color(0)
+
+
+func update_price():
 	price = Global.item_data[type].price + level * Global.item_data[type].increment
 	$Price.text = str(price)
-	adjust_color(0)
+
+
+func increase_price(item_type: int) -> void:
+	print("here")
+	if type != item_type:
+		return
+	
+	level += 1
+	update_price()
 
 
 func select() -> void:
@@ -57,6 +71,7 @@ func handle_buy():
 	match type:
 		Global.ITEM_TYPE.HEALTH:
 			world.heal(Global.HEAL_AMOUNT)
+			increase_price(type)
 			%StateChart.send_event("end_shop")
 
 		Global.ITEM_TYPE.SHOVEL:
