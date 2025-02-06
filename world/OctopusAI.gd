@@ -71,7 +71,7 @@ func run_strategy(strategy: Callable):
 
 func strategy_incremental_deterministic_a():
 	var intensity = 1 + floor(run_strategy_count / 6.0) # increases every 2 cycles (as described below)
-	var clamped_intensity = clamp(intensity, 1, 10)
+	var clamped_intensity = clamp(intensity, 1, 8)
 
 	match run_strategy_count % 3:
 		0:
