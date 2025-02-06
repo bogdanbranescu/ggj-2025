@@ -13,16 +13,19 @@ var current_hp
 var shake_offset := Vector2.ZERO
 var is_shaking := false
 
+var baseline_bgm_volume := 0
+var mute_bgm_volume := -80
+
 
 func _ready() -> void:
 	EventBus.octopus_attacked.connect(start_shaking_screen)
 	EventBus.crossfade_music.connect(crossfade_music.bind("attack"))
 
 
-	$BGMAttack.volume_db = -30
+	$BGMAttack.volume_db = baseline_bgm_volume
 	$BGMPeaceful.play()
 
-	$BGMAttack.volume_db = -80
+	$BGMAttack.volume_db = mute_bgm_volume
 	$BGMAttack.play()
 
 	current_hp = Global.MAX_HP
@@ -63,11 +66,11 @@ func playerTakeDamage(amount: int) -> void:
 func crossfade_music(phase: String):
 	match phase:
 		"peace":
-			get_tree().create_tween().tween_property($BGMAttack, "volume_db", -80, 3.0).set_trans(Tween.TRANS_EXPO)
-			get_tree().create_tween().tween_property($BGMPeaceful, "volume_db", -30, 0.8)
+			get_tree().create_tween().tween_property($BGMAttack, "volume_db", mute_bgm_volume, 3.0).set_trans(Tween.TRANS_EXPO)
+			get_tree().create_tween().tween_property($BGMPeaceful, "volume_db", baseline_bgm_volume, 0.8)
 		"attack":
-			get_tree().create_tween().tween_property($BGMPeaceful, "volume_db", -80, 3.0).set_trans(Tween.TRANS_EXPO)
-			get_tree().create_tween().tween_property($BGMAttack, "volume_db", -30, 0.8)
+			get_tree().create_tween().tween_property($BGMPeaceful, "volume_db", mute_bgm_volume, 3.0).set_trans(Tween.TRANS_EXPO)
+			get_tree().create_tween().tween_property($BGMAttack, "volume_db", baseline_bgm_volume, 0.8)
 			get_tree().create_tween().tween_callback(crossfade_music.bind("peace")).set_delay(5.0)
 		_:
 			print("Incorrect BGM crossfading destination!")
