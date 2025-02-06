@@ -926,6 +926,16 @@ But Mr Octopus will be back!
 Refresh page to restart game"
 horizontal_alignment = 1
 
+[node name="FullscreenInfo" type="Label" parent="UI"]
+offset_left = 8.0
+offset_top = 254.0
+offset_right = 86.0
+offset_bottom = 265.0
+theme = ExtResource("19_x7rgh")
+theme_override_fonts/font = ExtResource("29_x124v")
+theme_override_font_sizes/font_size = 9
+text = "F - Fullscreen"
+
 [node name="StateChart" type="Node" parent="."]
 unique_name_in_owner = true
 process_mode = 3
