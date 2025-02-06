@@ -82,7 +82,6 @@ func _ready() -> void:
 
 func _input(_event: InputEvent) -> void:
 	if Input.is_action_just_pressed("toggle_fullscreen"):
-		print("here")
 		var screen_mode = DisplayServer.window_get_mode()
 		if screen_mode == DisplayServer.WindowMode.WINDOW_MODE_FULLSCREEN:
 			DisplayServer.window_set_mode(DisplayServer.WindowMode.WINDOW_MODE_WINDOWED)
